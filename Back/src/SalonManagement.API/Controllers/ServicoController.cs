@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SalonManagement.API.Data;
 using SalonManagement.API.Models;
 
 namespace SalonManagement.API.Controllers
@@ -12,42 +13,22 @@ namespace SalonManagement.API.Controllers
     [Route("api/[controller]")]
     public class ServicoController : ControllerBase
     {
-        public IEnumerable<Servico> _servico = new Servico[]
-            {
-                new Servico()
-                {
-                    ServicoId = 1,
-                    DataServico = "25/11/2021",
-                    Cliente = "Amanda",
-                    DescricaoServico = "Arrumou o cabelo",
-                    ProdutoUtilizadoServico = "Shampoo",
-                    ValorServico = 25.49
-                },
-                new Servico()
-                {
-                    ServicoId = 2,
-                    DataServico = "25/11/2021",
-                    Cliente = "Jean",
-                    DescricaoServico = "Arrumou o cabelo",
-                    ProdutoUtilizadoServico = "Shampoo",
-                    ValorServico = 25.49
-                }
-            };
-        public ServicoController()
+        private readonly ContextoDeDados _contexto;
+        public ServicoController(ContextoDeDados contexto)
         {
-
+            _contexto = contexto;
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<Servico> GetById(int id)
+        public Servico GetById(int id)
         {
-            return _servico.Where(servico => servico.ServicoId == id);
+            return _contexto.Servicos.FirstOrDefault(servico => servico.ServicoId == id);
         }
 
         [HttpGet]
         public IEnumerable<Servico> Get()
         {
-            return _servico;
+            return _contexto.Servicos;
         }
 
         [HttpPost]

@@ -453,4 +453,9 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+##Outros
+
+#Banco de dados
+SalonManagement.db
+
 
