@@ -11,10 +11,10 @@ namespace SalonManagement.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ServicoController : ControllerBase
+    public class ServicosController : ControllerBase
     {
         private readonly ContextoDeDados _contexto;
-        public ServicoController(ContextoDeDados contexto)
+        public ServicosController(ContextoDeDados contexto)
         {
             _contexto = contexto;
         }
