@@ -1,7 +1,46 @@
-<h1>Serviços</h1>
+<h2>Serviços</h2>
+<hr />
 
-<div *ngFor="let servico of servicos">
-  {{ servico.cliente }}
-  {{ servico.dataServico }}
-  {{ servico.descricaoServico }}
+<div>
+  <div class="col-12 input-group">
+    <span class="input-group-text" id="addon-wrapping"
+      ><i class="fas fa-search iconeDeBusca"></i
+    ></span>
+    <input
+      [(ngModel)]="filtroTabela"
+      type="text"
+      class="form-control campoDeBusca"
+      placeholder="Digite aqui para buscar por nome de cliente ou data da realização do serviço"
+    />
+  </div>
 </div>
+<table class="table">
+  <thead class="text-center cabecalho">
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Data</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Valor</th>
+    </tr>
+  </thead>
+  <tbody class="text-center" *ngIf="servicos && servicos.length">
+    <tr *ngFor="let servico of servicosFiltrados">
+      <th scope="row">{{ servico.servicoId }}</th>
+      <td>{{ servico.cliente }}</td>
+      <td>{{ servico.dataServico }}</td>
+      <td>{{ servico.descricaoServico }}</td>
+      <td>{{ servico.valorServico }}</td>
+      <td>
+        <button type="button" class="btn btn-danger btn-sm">Apagar</button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="servicos.length == []">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h4>Nenhum serviço encontrado</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>

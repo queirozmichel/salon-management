@@ -1,0 +1,26 @@
+.navbar {
+  background-color: #fce1d9;
+  padding: 10px;
+  .navbar-brand {
+    letter-spacing: 3px;
+    color: #c24244;
+    font-weight: 700;
+    &:hover {
+      color: #c24244;
+      cursor: default;
+    }
+  }
+  .collapse {
+    font-weight: 500;
+  }
+  .navbar-toggler {
+    border: none;
+    box-shadow: none;
+  }
+  a {
+    color: rgb(158, 151, 146);
+    &:hover {
+      color: black;
+    }
+  }
+}

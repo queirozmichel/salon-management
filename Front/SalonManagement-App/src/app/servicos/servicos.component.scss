@@ -1,0 +1,25 @@
+.iconeDeBusca {
+  color: #c24244;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.campoDeBusca {
+  text-align: center;
+}
+
+.table {
+  .cabecalho {
+    background-color: white;
+  }
+  tbody {
+    tr {
+      &:hover {
+        background-color: #fce1d9;
+      }
+    }
+  }
+}
