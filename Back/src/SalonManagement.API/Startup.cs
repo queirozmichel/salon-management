@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using SalonManagement.API.Data;
+using SalonManagement.Persistence;
 
 namespace SalonManagement.API
 {
@@ -28,7 +28,7 @@ namespace SalonManagement.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ContextoDeDados>(contexto => contexto.UseSqlite(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<SalonManagementContexto>(contexto => contexto.UseSqlite(Configuration.GetConnectionString("Default")));
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>

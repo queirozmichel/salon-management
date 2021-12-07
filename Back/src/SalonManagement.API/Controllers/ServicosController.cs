@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SalonManagement.API.Data;
-using SalonManagement.API.Models;
+using SalonManagement.Persistence;
+using SalonManagement.Domain;
 
 namespace SalonManagement.API.Controllers
 {
@@ -13,8 +13,8 @@ namespace SalonManagement.API.Controllers
     [Route("api/[controller]")]
     public class ServicosController : ControllerBase
     {
-        private readonly ContextoDeDados _contexto;
-        public ServicosController(ContextoDeDados contexto)
+        private readonly SalonManagementContexto _contexto;
+        public ServicosController(SalonManagementContexto contexto)
         {
             _contexto = contexto;
         }
@@ -22,13 +22,13 @@ namespace SalonManagement.API.Controllers
         [HttpGet("{id}")]
         public Servico GetById(int id)
         {
-            return _contexto.Servicos.FirstOrDefault(servico => servico.ServicoId == id);
+            return _contexto.Servico.FirstOrDefault(servico => servico.Id == id);
         }
 
         [HttpGet]
         public IEnumerable<Servico> Get()
         {
-            return _contexto.Servicos;
+            return _contexto.Servico;
         }
 
         [HttpPost]
