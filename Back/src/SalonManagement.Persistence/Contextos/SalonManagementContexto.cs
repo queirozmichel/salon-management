@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SalonManagement.Domain;
 
-namespace SalonManagement.Persistence
+namespace SalonManagement.Persistence.Contextos
 {
     public class SalonManagementContexto : DbContext
     {

@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SalonManagement.Application;
+using SalonManagement.Application.Contratos;
 using SalonManagement.Persistence;
+using SalonManagement.Persistence.Contextos;
+using SalonManagement.Persistence.Contratos;
 
 namespace SalonManagement.API
 {
@@ -29,7 +26,13 @@ namespace SalonManagement.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SalonManagementContexto>(contexto => contexto.UseSqlite(Configuration.GetConnectionString("Default")));
-            services.AddControllers();
+            services.AddControllers()
+            .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddScoped<IServicoService, ServicoService>();
+            services.AddScoped<ISalonManagementPersist, SalonManagementPersist>();
+
+
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
