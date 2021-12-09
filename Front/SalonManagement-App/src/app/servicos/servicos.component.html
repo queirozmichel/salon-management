@@ -19,6 +19,7 @@
     <tr>
       <th scope="col">Código</th>
       <th scope="col">Cliente</th>
+      <th scope="col">Profissional</th>
       <th scope="col">Data</th>
       <th scope="col">Descrição</th>
       <th scope="col">Valor</th>
@@ -26,11 +27,12 @@
   </thead>
   <tbody class="text-center" *ngIf="servicos && servicos.length">
     <tr *ngFor="let servico of servicosFiltrados">
-      <th scope="row">{{ servico.servicoId }}</th>
-      <td>{{ servico.cliente }}</td>
-      <td>{{ servico.dataServico }}</td>
-      <td>{{ servico.descricaoServico }}</td>
-      <td>{{ servico.valorServico }}</td>
+      <th scope="row">{{ servico.id }}</th>
+      <td>{{ servico.cliente.nome }}</td>
+      <td>{{ servico.profissional.nome }}</td>
+      <td>{{ servico.data }}</td>
+      <td>{{ servico.descricao }}</td>
+      <td>{{ servico.valor }}</td>
       <td>
         <button type="button" class="btn btn-danger btn-sm">Apagar</button>
       </td>

@@ -10,6 +10,7 @@ import { ProdutosComponent } from './produtos/produtos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
+import { ServicoService } from './services/servico.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     CollapseModule.forRoot(),
   ],
-  providers: [],
+  providers: [ServicoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

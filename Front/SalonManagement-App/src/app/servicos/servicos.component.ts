@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ServicoService } from '../services/servico.service';
 
 @Component({
   selector: 'app-servicos',
@@ -31,14 +32,14 @@ export class ServicosComponent implements OnInit {
     );
   }
 
-  constructor(private clienteHttp: HttpClient) {}
+  constructor(private servicoService: ServicoService) {}
 
   ngOnInit(): void {
     this.getServicos();
   }
 
   public getServicos(): void {
-    this.clienteHttp.get('https://localhost:5001/api/servicos').subscribe({
+    this.servicoService.getServico().subscribe({
       next: (resposta: any) => {
         (this.servicos = resposta), (this.servicosFiltrados = this.servicos);
       },
