@@ -11,7 +11,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { ProdutosComponent } from './components/produtos/produtos.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
