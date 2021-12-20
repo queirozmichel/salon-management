@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+
+import { Servico } from '../models/Servico';
 import { ServicoService } from '../services/servico.service';
 
 @Component({
@@ -8,9 +14,10 @@ import { ServicoService } from '../services/servico.service';
   styleUrls: ['./servicos.component.scss'],
 })
 export class ServicosComponent implements OnInit {
-  public servicos: any = [];
+  public servicos: Servico[] = [];
   private _filtroTabela: string = '';
-  public servicosFiltrados: any = [];
+  public servicosFiltrados: Servico[] = [];
+  modalRef?: BsModalRef;
 
   public get filtroTabela(): string {
     return this._filtroTabela;
@@ -23,7 +30,32 @@ export class ServicosComponent implements OnInit {
       : this.servicos;
   }
 
-  public filtrarServicos(filtro: string): any {
+  constructor(
+    private servicoService: ServicoService,
+    private modalService: BsModalService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
+  ) {}
+
+  ngOnInit(): void {
+    this.spinner.show();
+    this.getServicos();
+  }
+
+  public openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public confirmarExclusao(): void {
+    this.modalRef?.hide();
+    this.toastr.success('O serviço foi excluído.', 'Sucesso!');
+  }
+
+  public negarExclusao(): void {
+    this.modalRef?.hide();
+  }
+
+  public filtrarServicos(filtro: string): Servico[] {
     filtro = filtro.toLocaleLowerCase();
     return this.servicos.filter(
       (servico: any) =>
@@ -32,19 +64,19 @@ export class ServicosComponent implements OnInit {
     );
   }
 
-  constructor(private servicoService: ServicoService) {}
-
-  ngOnInit(): void {
-    this.getServicos();
-  }
-
   public getServicos(): void {
-    this.servicoService.getServico().subscribe({
-      next: (resposta: any) => {
+    this.servicoService.getServicos().subscribe({
+      next: (resposta: Servico[]) => {
         (this.servicos = resposta), (this.servicosFiltrados = this.servicos);
       },
-      error: (erro: any) => console.error(erro),
-      complete: () => {},
+      error: (erro: any) => {
+        this.spinner.hide();
+        console.error(erro);
+        this.toastr.error('Impossível carregar os serviços.', 'Erro!');
+      },
+      complete: () => {
+        this.spinner.hide();
+      },
     });
   }
 }

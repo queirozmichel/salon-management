@@ -1,7 +1,7 @@
 <h2>Serviços</h2>
 <hr />
 
-<div>
+<div class="px-5 my-4">
   <div class="col-12 input-group">
     <span class="input-group-text" id="addon-wrapping"
       ><i class="fas fa-search iconeDeBusca"></i
@@ -11,6 +11,8 @@
       type="text"
       class="form-control campoDeBusca"
       placeholder="Digite aqui para buscar por nome de cliente ou data da realização do serviço"
+      onfocus="this.placeholder = ''"
+      onblur="this.placeholder ='Digite aqui para buscar por nome de cliente ou data da realização do serviço'"
     />
   </div>
 </div>
@@ -34,11 +36,18 @@
       <td>{{ servico.descricao }}</td>
       <td>{{ servico.valor }}</td>
       <td>
-        <button type="button" class="btn btn-danger btn-sm">Apagar</button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          tooltip="Apagar"
+          (click)="openModal(template)"
+        >
+          <i class="fas fa-trash iconeDeLixo"></i>
+        </button>
       </td>
     </tr>
   </tbody>
-  <tfoot *ngIf="servicos.length == []">
+  <tfoot *ngIf="servicos.length == 0">
     <tr>
       <td colspan="8" class="text-center">
         <h4>Nenhum serviço encontrado</h4>
@@ -46,3 +55,15 @@
     </tr>
   </tfoot>
 </table>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer apagar?</p>
+    <button type="button" class="btn btn-default" (click)="confirmarExclusao()">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="negarExclusao()">
+      Não
+    </button>
+  </div>
+</ng-template>
