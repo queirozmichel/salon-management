@@ -5,8 +5,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
-import { Servico } from '../models/Servico';
-import { ServicoService } from '../services/servico.service';
+import { Servico } from '../../models/Servico';
+import { ServicoService } from '../../services/servico.service';
 
 @Component({
   selector: 'app-servicos',

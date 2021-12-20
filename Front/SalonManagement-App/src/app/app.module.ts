@@ -9,22 +9,33 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { ServicosComponent } from './components/servicos/servicos.component';
+import { ProdutosComponent } from './components/produtos/produtos.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ServicosComponent } from './servicos/servicos.component';
-import { ProdutosComponent } from './produtos/produtos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { ServicoService } from './services/servico.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ProfissionaisComponent } from './components/profissionais/profissionais.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ServicosComponent,
     ProdutosComponent,
+    ClientesComponent,
+    ProfissionaisComponent,
+    PerfilComponent,
     NavbarComponent,
+    DashboardComponent,
+    TituloComponent,
   ],
   imports: [
     BrowserModule,
