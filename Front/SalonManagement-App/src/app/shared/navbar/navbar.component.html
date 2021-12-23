@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light mb-4">
+<nav
+  class="navbar navbar-expand-lg navbar-light mb-4 shadow-sm"
+  *ngIf="mostrarMenu()"
+>
   <div class="container">
     <a class="navbar-brand">Salão</a>
     <button
@@ -21,23 +24,40 @@
     >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="dashboard"
+          <a
+            class="nav-link"
+            aria-current="page"
+            routerLink="dashboard"
+            routerLinkActive="active"
             >Dashboard</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="servicos"
+          <a
+            class="nav-link linkServicos"
+            aria-current="page"
+            routerLink="servicos/lista"
+            routerLinkActive="active"
             >Serviços</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="produtos">Produtos</a>
+          <a class="nav-link" routerLink="produtos" routerLinkActive="active"
+            >Produtos</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="profissionais">Profissionais</a>
+          <a
+            class="nav-link"
+            routerLink="profissionais"
+            routerLinkActive="active"
+            >Profissionais</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="clientes">Clientes</a>
+          <a class="nav-link" routerLink="clientes" routerLinkActive="active"
+            >Clientes</a
+          >
         </li>
       </ul>
 
@@ -51,14 +71,14 @@
         </a>
         <ul *dropdownMenu class="dropdown-menu" role="menu">
           <li role="menuitem">
-            <a class="dropdown-item" routerLink="perfil">Perfil</a>
+            <a class="dropdown-item" routerLink="usuario/perfil">Perfil</a>
           </li>
           <li role="menuitem">
             <a class="dropdown-item" href="#">Another action</a>
           </li>
           <li class="divider dropdown-divider"></li>
           <li role="menuitem">
-            <a class="dropdown-item sair" href="#">Sair</a>
+            <a class="dropdown-item sair" routerLink="usuario/login">Sair</a>
           </li>
         </ul>
       </div>

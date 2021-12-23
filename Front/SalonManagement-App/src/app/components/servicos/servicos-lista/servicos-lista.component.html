@@ -1,0 +1,72 @@
+<div class="card bg-light rounded shadow-sm p-4">
+  <div class="my-4">
+    <div class="col-12 input-group">
+      <span class="input-group-text"
+        ><i class="fas fa-search iconeDeBusca"></i
+      ></span>
+      <input
+        [(ngModel)]="filtroTabela"
+        type="text"
+        class="form-control campoDeBusca"
+        placeholder="Buscar por cliente ou data"
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder ='Buscar por cliente ou data'"
+      />
+    </div>
+  </div>
+  <table class="table">
+    <thead class="text-center cabecalho">
+      <tr>
+        <th class="d-none d-md-table-cell" scope="col">Código</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Profissional</th>
+        <th scope="col">Data</th>
+        <th class="d-none d-md-table-cell" scope="col">Descrição</th>
+        <th class="d-none d-sm-table-cell" scope="col">Valor</th>
+      </tr>
+    </thead>
+    <tbody class="text-center" *ngIf="servicos && servicos.length">
+      <tr
+        style="cursor: pointer"
+        *ngFor="let servico of servicosFiltrados"
+        (click)="detalheServico(servico.id)"
+      >
+        <th class="d-none d-md-table-cell">{{ servico.id }}</th>
+        <td>{{ servico.cliente.nome }}</td>
+        <td>{{ servico.profissional.nome }}</td>
+        <td>{{ servico.data }}</td>
+        <td class="d-none d-md-table-cell">{{ servico.descricao }}</td>
+        <td class="d-none d-sm-table-cell">{{ servico.valor }}</td>
+        <td class="colunaApagar">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            tooltip="Apagar"
+            (click)="openModal(template)"
+          >
+            <i class="fas fa-trash iconeDeLixo"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="servicos.length == 0">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>Nenhum serviço encontrado</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer apagar?</p>
+    <button type="button" class="btn btn-default" (click)="confirmarExclusao()">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="negarExclusao()">
+      Não
+    </button>
+  </div>
+</ng-template>

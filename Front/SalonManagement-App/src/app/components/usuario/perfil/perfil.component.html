@@ -1,0 +1,129 @@
+<app-titulo
+  [titulo]="'Perfil'"
+  [iconeTitulo]="'fas fa-address-card'"
+></app-titulo>
+
+<div>
+  <div class="main-body">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                alt="Admin"
+                class="rounded-circle p-1 bg-primary"
+                width="110"
+              />
+              <div class="mt-3">
+                <h4>José</h4>
+                <p class="text-secondary mb-1">Full Stack Developer</p>
+                <p class="text-muted font-size-sm">
+                  Bay Area, San Francisco, CA
+                </p>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <ul class="list-group list-group-flush">
+              <li
+                class="
+                  list-group-item
+                  d-flex
+                  justify-content-between
+                  align-items-center
+                "
+              >
+                <h6 class="mb-0"><i class="fab fa-instagram"></i>Instagram</h6>
+                <span class="text-secondary">bootdey</span>
+              </li>
+              <li
+                class="
+                  list-group-item
+                  d-flex
+                  justify-content-between
+                  align-items-center
+                "
+              >
+                <h6 class="mb-0">
+                  <i class="fab fa-facebook-square"></i>Facebook
+                </h6>
+                <span class="text-secondary">bootdey</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card bg-light">
+          <div class="card-body">
+            <div class="row mb-3 mt-3">
+              <div class="col-sm-3 d-flex align-items-center">
+                <h6 class="mb-0">Primeiro nome</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3 d-flex align-items-center">
+                <h6 class="mb-0">Último nome</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3 d-flex align-items-center">
+                <h6 class="mb-0">E-mail</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3 d-flex align-items-center">
+                <h6 class="mb-0">Nome de usuário</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3 d-flex align-items-center">
+                <h6 class="mb-0">Senha</h6>
+              </div>
+
+              <div class="col d-flex justify-content-between">
+                <div class="col-sm-5 me-2 text-secondary">
+                  <input
+                    type="password"
+                    class="form-control text-center"
+                    placeholder="Senha"
+                    onfocus="this.placeholder = ''"
+                    onblur="this.placeholder ='Senha'"
+                  />
+                </div>
+                <div class="col-sm-5 text-secondary">
+                  <input
+                    type="password"
+                    class="form-control text-center"
+                    placeholder="Confirmar senha"
+                    onfocus="this.placeholder = ''"
+                    onblur="this.placeholder ='Confirmar senha'"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row mb">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9 mt-2 d-flex justify-content-center">
+                <button class="btn btn-success botao">Salvar alterações</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

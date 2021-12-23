@@ -22,17 +22,27 @@ import { ServicoService } from './services/servico.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ProfissionaisComponent } from './components/profissionais/profissionais.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
+import { ServicoDetalheComponent } from './components/servicos/servico-detalhe/servico-detalhe.component';
+import { ServicosListaComponent } from './components/servicos/servicos-lista/servicos-lista.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { LoginComponent } from './components/usuario/login/login.component';
+import { RegistrarComponent } from './components/usuario/registrar/registrar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ServicosComponent,
+    ServicosListaComponent,
+    ServicoDetalheComponent,
     ProdutosComponent,
     ClientesComponent,
     ProfissionaisComponent,
     PerfilComponent,
+    UsuarioComponent,
+    LoginComponent,
+    RegistrarComponent,
     NavbarComponent,
     DashboardComponent,
     TituloComponent,

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,69 +15,20 @@ import { ServicoService } from '../../services/servico.service';
   styleUrls: ['./servicos.component.scss'],
 })
 export class ServicosComponent implements OnInit {
-  public servicos: Servico[] = [];
-  private _filtroTabela: string = '';
-  public servicosFiltrados: Servico[] = [];
-  modalRef?: BsModalRef;
+  constructor(private router: Router) {}
+  ngOnInit(): void {}
 
-  public get filtroTabela(): string {
-    return this._filtroTabela;
+  public botaoListar(): boolean {
+    if (this.router.url != '/servicos/lista') {
+      return true;
+    }
+    return false;
   }
 
-  public set filtroTabela(value: string) {
-    this._filtroTabela = value;
-    this.servicosFiltrados = this.filtroTabela
-      ? this.filtrarServicos(this.filtroTabela)
-      : this.servicos;
-  }
-
-  constructor(
-    private servicoService: ServicoService,
-    private modalService: BsModalService,
-    private toastr: ToastrService,
-    private spinner: NgxSpinnerService
-  ) {}
-
-  ngOnInit(): void {
-    this.spinner.show();
-    this.getServicos();
-  }
-
-  public openModal(template: TemplateRef<any>): void {
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-  }
-
-  public confirmarExclusao(): void {
-    this.modalRef?.hide();
-    this.toastr.success('O serviço foi excluído.', 'Sucesso!');
-  }
-
-  public negarExclusao(): void {
-    this.modalRef?.hide();
-  }
-
-  public filtrarServicos(filtro: string): Servico[] {
-    filtro = filtro.toLocaleLowerCase();
-    return this.servicos.filter(
-      (servico: any) =>
-        servico.cliente.toLocaleLowerCase().indexOf(filtro) !== -1 ||
-        servico.dataServico.toLocaleLowerCase().indexOf(filtro) !== -1
-    );
-  }
-
-  public getServicos(): void {
-    this.servicoService.getServicos().subscribe({
-      next: (resposta: Servico[]) => {
-        (this.servicos = resposta), (this.servicosFiltrados = this.servicos);
-      },
-      error: (erro: any) => {
-        this.spinner.hide();
-        console.error(erro);
-        this.toastr.error('Impossível carregar os serviços.', 'Erro!');
-      },
-      complete: () => {
-        this.spinner.hide();
-      },
-    });
+  public botaoNovo(): boolean {
+    if (this.router.url != '/servicos/detalhe') {
+      return true;
+    }
+    return false;
   }
 }

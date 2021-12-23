@@ -1,4 +1,20 @@
-<h2>
-  {{ titulo }}
-</h2>
-<hr />
+<div class="d-flex p-3 my-3 rounded shadow-sm barraTitulo">
+  <div class="d-flex align-items-center me-auto">
+    <i class="{{ iconeTitulo }} me-3 ms-2 icone"></i>
+    <div class="lh-1">
+      <h2>{{ titulo }}</h2>
+    </div>
+  </div>
+  <div class="d-flex align-items-center" *ngIf="botaoListarServicos == true">
+    <a class="d-flex btn btn-dark me-2" routerLink="/servicos/detalhe">
+      <i class="fa fa-plus-circle mx-1 my-1"></i>
+      <i class="textoBotao d-none d-md-block">Novo Serviço</i>
+    </a>
+  </div>
+  <div class="d-flex align-items-center" *ngIf="botaoNovoServico == true">
+    <a class="d-flex btn btn-dark" (click)="listar()">
+      <i class="fas fa-list mx-1 my-1"></i>
+      <i class="textoBotao d-none d-md-block">Listar {{ titulo }}</i>
+    </a>
+  </div>
+</div>

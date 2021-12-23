@@ -1,68 +1,7 @@
-<app-titulo [titulo]="'Serviços'"></app-titulo>
-
-<div class="px-5 my-4">
-  <div class="col-12 input-group">
-    <span class="input-group-text" id="addon-wrapping"
-      ><i class="fas fa-search iconeDeBusca"></i
-    ></span>
-    <input
-      [(ngModel)]="filtroTabela"
-      type="text"
-      class="form-control campoDeBusca"
-      placeholder="Digite aqui para buscar por nome de cliente ou data da realização do serviço"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder ='Digite aqui para buscar por nome de cliente ou data da realização do serviço'"
-    />
-  </div>
-</div>
-<table class="table">
-  <thead class="text-center cabecalho">
-    <tr>
-      <th scope="col">Código</th>
-      <th scope="col">Cliente</th>
-      <th scope="col">Profissional</th>
-      <th scope="col">Data</th>
-      <th scope="col">Descrição</th>
-      <th scope="col">Valor</th>
-    </tr>
-  </thead>
-  <tbody class="text-center" *ngIf="servicos && servicos.length">
-    <tr *ngFor="let servico of servicosFiltrados">
-      <th scope="row">{{ servico.id }}</th>
-      <td>{{ servico.cliente.nome }}</td>
-      <td>{{ servico.profissional.nome }}</td>
-      <td>{{ servico.data }}</td>
-      <td>{{ servico.descricao }}</td>
-      <td>{{ servico.valor }}</td>
-      <td>
-        <button
-          type="button"
-          class="btn btn-danger btn-sm"
-          tooltip="Apagar"
-          (click)="openModal(template)"
-        >
-          <i class="fas fa-trash iconeDeLixo"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-  <tfoot *ngIf="servicos.length == 0">
-    <tr>
-      <td colspan="8" class="text-center">
-        <h4>Nenhum serviço encontrado</h4>
-      </td>
-    </tr>
-  </tfoot>
-</table>
-
-<ng-template #template>
-  <div class="modal-body text-center">
-    <p>Tem certeza que quer apagar?</p>
-    <button type="button" class="btn btn-default" (click)="confirmarExclusao()">
-      Sim
-    </button>
-    <button type="button" class="btn btn-primary" (click)="negarExclusao()">
-      Não
-    </button>
-  </div>
-</ng-template>
+<app-titulo
+  [titulo]="'Serviços'"
+  [iconeTitulo]="'fas fa-tasks'"
+  [botaoListarServicos]="botaoNovo()"
+  [botaoNovoServico]="botaoListar()"
+></app-titulo>
+<router-outlet></router-outlet>
