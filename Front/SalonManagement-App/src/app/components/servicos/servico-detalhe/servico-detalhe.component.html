@@ -1,48 +1,104 @@
 <div class="card rounded bg-light shadow-sm">
-  <form>
+  <form [formGroup]="formulario">
     <div class="row p-4">
       <div class="col-md-8">
         <div class="col-md">
           <label class="form-label">Cliente</label>
-          <select class="form-select">
+          <select
+            class="form-select"
+            formControlName="cliente"
+            [ngClass]="{
+              'is-invalid': f.cliente.errors && f.cliente.touched
+            }"
+          >
             <option selected></option>
             <option>...</option>
             <option>...</option>
           </select>
+          <div class="invalid-feedback">Cliente é obrigatório</div>
         </div>
         <div class="col-md mt-2">
           <label class="form-label">Profissional</label>
-          <select class="form-select">
+          <select
+            class="form-select"
+            formControlName="profissional"
+            [ngClass]="{
+              'is-invalid': f.profissional.errors && f.profissional.touched
+            }"
+          >
             <option selected></option>
             <option>...</option>
           </select>
+          <div class="invalid-feedback">Profissional é obrigatório</div>
         </div>
 
         <div class="row">
           <div class="col-md mt-2">
             <label class="form-label">Data</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="data"
+              [ngClass]="{
+                'is-invalid': f.data.errors && f.data.touched
+              }"
+            />
+            <div class="invalid-feedback">Data é obrigatório</div>
           </div>
 
           <div class="col-md mt-2">
             <label class="form-label">Valor</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="valor"
+              [ngClass]="{
+                'is-invalid': f.valor.errors && f.valor.touched
+              }"
+            />
+            <div class="invalid-feedback">Valor é obrigatório</div>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="col-md">
           <label class="my-2">Descrição do serviço</label>
-          <textarea class="form-control" rows="7"></textarea>
+          <textarea
+            class="form-control"
+            rows="7"
+            formControlName="descricao"
+            [ngClass]="{
+              'is-invalid': f.descricao.errors && f.descricao.touched
+            }"
+          ></textarea>
+          <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+            Descrição é obrigatório
+          </div>
+          <div *ngIf="f.descricao.errors?.minlength" class="invalid-feedback">
+            Deve ter no mínimo 5 caracteres
+          </div>
+          <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 100 caracteres
+          </div>
         </div>
       </div>
     </div>
 
     <div class="mt-4 d-flex justify-content-evenly card-footer">
-      <button type="submit" class="btn btn-secondary botao">
+      <button
+        type="submit"
+        class="btn btn-secondary botao"
+        (click)="resetarFormulario()"
+      >
         Limpar dados
       </button>
-      <button type="submit" class="btn btn-success botao">Salvar</button>
+      <button
+        type="submit"
+        class="btn btn-success botao"
+        [disabled]="formulario.invalid"
+      >
+        Salvar
+      </button>
     </div>
   </form>
 </div>
