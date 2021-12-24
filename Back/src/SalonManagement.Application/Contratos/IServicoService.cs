@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using SalonManagement.Domain;
+using SalonManagement.Application.Dtos;
 
 namespace SalonManagement.Application.Contratos
 {
     public interface IServicoService
     {
-        Task<Servico> AddServico(Servico model);
-        Task<Servico> UpdateServico(int servicoId, Servico model);
+        Task<ServicoDto> AddServico(ServicoDto model);
+        Task<ServicoDto> UpdateServico(int servicoId, ServicoDto model);
         Task<bool> DeleteServico(int servicoId);
-        Task<Servico[]> GetAllServicosAsync(bool incluirProdutos = false);
-        Task<Servico[]> GetAllServicosByDataAsync(string data, bool incluirProdutos = false);
-        Task<Servico> GetServicoByIdAsync(int servicoId, bool incluirProdutos = false);
+        Task<ServicoDto[]> GetAllServicosAsync(bool incluirProdutos = false);
+        Task<ServicoDto[]> GetAllServicosByDataAsync(string data, bool incluirProdutos = false);
+        Task<ServicoDto> GetServicoByIdAsync(int servicoId, bool incluirProdutos = false);
     }
 }

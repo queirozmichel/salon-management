@@ -9,6 +9,7 @@ using SalonManagement.Domain;
 using SalonManagement.Persistence.Contextos;
 using SalonManagement.Application.Contratos;
 using Microsoft.AspNetCore.Http;
+using SalonManagement.Application.Dtos;
 
 namespace SalonManagement.API.Controllers
 {
@@ -31,8 +32,9 @@ namespace SalonManagement.API.Controllers
                 var servicos = await _servicoService.GetAllServicosAsync(true);
                 if (servicos == null)
                 {
-                    return NotFound("Nenhum serviço encontrado.");
+                    return NoContent();
                 }
+
                 return Ok(servicos);
             }
             catch (Exception ex)
@@ -50,7 +52,7 @@ namespace SalonManagement.API.Controllers
                 var servico = await _servicoService.GetServicoByIdAsync(id, true);
                 if (servico == null)
                 {
-                    return NotFound("Serviço por Id não encontrado.");
+                    return NoContent();
                 }
                 return Ok(servico);
             }
@@ -69,7 +71,7 @@ namespace SalonManagement.API.Controllers
                 var servico = await _servicoService.GetAllServicosByDataAsync(data, true);
                 if (servico == null)
                 {
-                    return NotFound("Serviço por data não encontrado.");
+                    return NoContent();
                 }
                 return Ok(servico);
             }
@@ -82,14 +84,14 @@ namespace SalonManagement.API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Post(Servico model)
+        public async Task<IActionResult> Post(ServicoDto model)
         {
             try
             {
                 var servico = await _servicoService.AddServico(model);
                 if (servico == null)
                 {
-                    return BadRequest("Erro ao tentar adicionar serviço.");
+                    return NoContent();
                 }
                 return Ok(servico);
             }
@@ -101,14 +103,14 @@ namespace SalonManagement.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Servico model)
+        public async Task<IActionResult> Put(int id, ServicoDto model)
         {
             try
             {
                 var servico = await _servicoService.UpdateServico(id, model);
                 if (servico == null)
                 {
-                    return BadRequest("Erro ao tentar adicionar serviço.");
+                    return NoContent();
                 }
                 return Ok(servico);
             }
@@ -123,13 +125,20 @@ namespace SalonManagement.API.Controllers
         {
             try
             {
+                var servico = await _servicoService.GetServicoByIdAsync(id, true);
+                if (servico == null)
+                {
+                    return NoContent();
+                }
+
+
                 if (await _servicoService.DeleteServico(id))
                 {
                     return Ok("Deletado.");
                 }
                 else
                 {
-                    return BadRequest("Serviço não deletado.");
+                    throw new Exception("Ocorreu um problema ao tentar deletar o serviço.");
                 }
             }
             catch (Exception ex)

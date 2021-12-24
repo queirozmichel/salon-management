@@ -457,5 +457,7 @@ $RECYCLE.BIN/
 
 #Banco de dados
 SalonManagement.db
+SalonManagement.db-shm
+SalonManagement.db-wal
 
 

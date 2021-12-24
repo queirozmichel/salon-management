@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using SalonManagement.Application.Contratos;
+using SalonManagement.Application.Dtos;
 using SalonManagement.Domain;
 using SalonManagement.Persistence.Contratos;
 
@@ -11,19 +12,24 @@ namespace SalonManagement.Application
     public class ServicoService : IServicoService
     {
         private readonly ISalonManagementPersist _salonManagementPersist;
-        public ServicoService(ISalonManagementPersist salonManagementPersist)
+        private readonly IMapper _mapper;
+        public ServicoService(ISalonManagementPersist salonManagementPersist, IMapper mapper)
         {
+            _mapper = mapper;
             _salonManagementPersist = salonManagementPersist;
 
         }
-        public async Task<Servico> AddServico(Servico model)
+        public async Task<ServicoDto> AddServico(ServicoDto model)
         {
             try
             {
-                _salonManagementPersist.Add<Servico>(model);
+                var servico = _mapper.Map<Servico>(model);
+                _salonManagementPersist.Add<Servico>(servico);
+
                 if (await _salonManagementPersist.SaveChangesAsync())
                 {
-                    return await _salonManagementPersist.GetServicoByIdAsync(model.Id, false);
+                    var servicoRetorno = await _salonManagementPersist.GetServicoByIdAsync(servico.Id, false);
+                    return _mapper.Map<ServicoDto>(servicoRetorno);
                 }
                 return null;
             }
@@ -33,7 +39,7 @@ namespace SalonManagement.Application
             }
         }
 
-        public async Task<Servico> UpdateServico(int servicoId, Servico model)
+        public async Task<ServicoDto> UpdateServico(int servicoId, ServicoDto model)
         {
             try
             {
@@ -45,11 +51,15 @@ namespace SalonManagement.Application
 
                 model.Id = servico.Id;
 
-                _salonManagementPersist.Update(model);
+                _mapper.Map(model, servico);
+
+
+                _salonManagementPersist.Update<Servico>(servico);
 
                 if (await _salonManagementPersist.SaveChangesAsync())
                 {
-                    return await _salonManagementPersist.GetServicoByIdAsync(model.Id, false);
+                    var servicoRetorno = await _salonManagementPersist.GetServicoByIdAsync(servico.Id, false);
+                    return _mapper.Map<ServicoDto>(servicoRetorno);
                 }
                 return null;
             }
@@ -79,7 +89,7 @@ namespace SalonManagement.Application
             }
         }
 
-        public async Task<Servico[]> GetAllServicosAsync(bool incluirProdutos = false)
+        public async Task<ServicoDto[]> GetAllServicosAsync(bool incluirProdutos = false)
         {
             try
             {
@@ -88,7 +98,9 @@ namespace SalonManagement.Application
                 {
                     return null;
                 }
-                return servicos;
+
+                var resultado = _mapper.Map<ServicoDto[]>(servicos);
+                return resultado;
             }
             catch (Exception ex)
             {
@@ -96,7 +108,7 @@ namespace SalonManagement.Application
             }
         }
 
-        public async Task<Servico[]> GetAllServicosByDataAsync(string data, bool incluirProdutos = false)
+        public async Task<ServicoDto[]> GetAllServicosByDataAsync(string data, bool incluirProdutos = false)
         {
             try
             {
@@ -105,7 +117,8 @@ namespace SalonManagement.Application
                 {
                     return null;
                 }
-                return servicos;
+                var resultado = _mapper.Map<ServicoDto[]>(servicos);
+                return resultado;
             }
             catch (Exception ex)
             {
@@ -113,16 +126,17 @@ namespace SalonManagement.Application
             }
         }
 
-        public async Task<Servico> GetServicoByIdAsync(int servicoId, bool incluirProdutos = false)
+        public async Task<ServicoDto> GetServicoByIdAsync(int servicoId, bool incluirProdutos = false)
         {
             try
             {
-                var servicos = await _salonManagementPersist.GetServicoByIdAsync(servicoId, incluirProdutos);
-                if (servicos == null)
+                var servico = await _salonManagementPersist.GetServicoByIdAsync(servicoId, incluirProdutos);
+                if (servico == null)
                 {
                     return null;
                 }
-                return servicos;
+                var resultado = _mapper.Map<ServicoDto>(servico);
+                return resultado;
             }
             catch (Exception ex)
             {

@@ -10,6 +10,8 @@ using SalonManagement.Application.Contratos;
 using SalonManagement.Persistence;
 using SalonManagement.Persistence.Contextos;
 using SalonManagement.Persistence.Contratos;
+using AutoMapper;
+using System;
 
 namespace SalonManagement.API
 {
@@ -29,6 +31,7 @@ namespace SalonManagement.API
             services.AddControllers()
             .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IServicoService, ServicoService>();
             services.AddScoped<ISalonManagementPersist, SalonManagementPersist>();
 
