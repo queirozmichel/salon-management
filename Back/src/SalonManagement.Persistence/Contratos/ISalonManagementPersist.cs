@@ -25,5 +25,11 @@ namespace SalonManagement.Persistence.Contratos
         Task<Produto[]> GetAllProdutosAsync();
         Task<Produto> GetProdutoByIdAsync(int produtoId);
 
+        //CLIENTES
+
+        Task<Cliente[]> GetAllClientesByNameAsync(string nome);
+        Task<Cliente[]> GetAllClientesAsync();
+        Task<Cliente> GetClienteByIdAsync(int clienteId);
+
     }
 }

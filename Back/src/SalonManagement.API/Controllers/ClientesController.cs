@@ -15,12 +15,12 @@ namespace SalonManagement.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ServicosController : ControllerBase
+    public class ClientesController : ControllerBase
     {
-        private readonly IServicoService _servicoService;
-        public ServicosController(IServicoService servicoService)
+        private readonly IClienteService _clienteService;
+        public ClientesController(IClienteService clienteService)
         {
-            _servicoService = servicoService;
+            _clienteService = clienteService;
 
         }
 
@@ -29,18 +29,18 @@ namespace SalonManagement.API.Controllers
         {
             try
             {
-                var servicos = await _servicoService.GetAllServicosAsync(true);
-                if (servicos == null)
+                var clientes = await _clienteService.GetAllClientesAsync();
+                if (clientes == null)
                 {
                     return NoContent();
                 }
 
-                return Ok(servicos);
+                return Ok(clientes);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                 $"Erro ao tentar recuperar serviços. Erro: {ex.Message}");
+                 $"Erro ao tentar recuperar clientes. Erro: {ex.Message}");
             }
         }
 
@@ -49,75 +49,75 @@ namespace SalonManagement.API.Controllers
         {
             try
             {
-                var servico = await _servicoService.GetServicoByIdAsync(id, true);
-                if (servico == null)
+                var cliente = await _clienteService.GetClienteByIdAsync(id);
+                if (cliente == null)
                 {
                     return NoContent();
                 }
-                return Ok(servico);
+                return Ok(cliente);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                 $"Erro ao tentar recuperar serviço. Erro: {ex.Message}");
+                 $"Erro ao tentar recuperar cliente. Erro: {ex.Message}");
             }
         }
 
-        [HttpGet("data/{data}")]
-        public async Task<IActionResult> GetByData(string data)
+        [HttpGet("nome/{nome}")]
+        public async Task<IActionResult> GetByNome(string nome)
         {
             try
             {
-                var servico = await _servicoService.GetAllServicosByDataAsync(data, true);
-                if (servico == null)
+                var cliente = await _clienteService.GetAllClientesByNameAsync(nome);
+                if (cliente == null)
                 {
                     return NoContent();
                 }
-                return Ok(servico);
+                return Ok(cliente);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                 $"Erro ao tentar recuperar serviços. Erro: {ex.Message}");
+                 $"Erro ao tentar recuperar clientes. Erro: {ex.Message}");
             }
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Post(ServicoDto model)
+        public async Task<IActionResult> Post(ClienteDto model)
         {
             try
             {
-                var servico = await _servicoService.AddServico(model);
-                if (servico == null)
+                var cliente = await _clienteService.AddCliente(model);
+                if (cliente == null)
                 {
                     return NoContent();
                 }
-                return Ok(servico);
+                return Ok(cliente);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                 $"Erro ao tentar adicionar o serviço. Erro: {ex.Message}");
+                 $"Erro ao tentar adicionar o cliente. Erro: {ex.Message}");
             }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, ServicoDto model)
+        public async Task<IActionResult> Put(int id, ClienteDto model)
         {
             try
             {
-                var servico = await _servicoService.UpdateServico(id, model);
-                if (servico == null)
+                var cliente = await _clienteService.UpdateCliente(id, model);
+                if (cliente == null)
                 {
                     return NoContent();
                 }
-                return Ok(servico);
+                return Ok(cliente);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                 $"Erro ao tentar atualizar o serviço. Erro: {ex.Message}");
+                 $"Erro ao tentar atualizar o cliente. Erro: {ex.Message}");
             }
         }
         [HttpDelete("{id}")]
@@ -125,26 +125,26 @@ namespace SalonManagement.API.Controllers
         {
             try
             {
-                var servico = await _servicoService.GetServicoByIdAsync(id, true);
-                if (servico == null)
+                var cliente = await _clienteService.GetClienteByIdAsync(id);
+                if (cliente == null)
                 {
                     return NoContent();
                 }
 
 
-                if (await _servicoService.DeleteServico(id))
+                if (await _clienteService.DeleteCliente(id))
                 {
                     return Ok(new { mensagem = "Deletado" });
                 }
                 else
                 {
-                    throw new Exception("Ocorreu um problema ao tentar deletar o serviço.");
+                    throw new Exception("Ocorreu um problema ao tentar deletar o cliente.");
                 }
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                 $"Erro ao tentar deletar o serviço. Erro: {ex.Message}");
+                 $"Erro ao tentar deletar o cliente. Erro: {ex.Message}");
             }
         }
     }

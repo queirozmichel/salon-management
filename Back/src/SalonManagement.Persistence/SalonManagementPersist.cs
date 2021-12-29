@@ -110,5 +110,34 @@ namespace SalonManagement.Persistence
             .Where(x => x.Id == produtoId);
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task<Cliente[]> GetAllClientesByNameAsync(string nome)
+        {
+            IQueryable<Cliente> query = _contexto.Cliente;
+
+            query = query.AsNoTracking().OrderBy(x => x.Id)
+            .Where(x => x.Nome.ToLower().Contains(nome.ToLower()));
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Cliente[]> GetAllClientesAsync()
+        {
+            IQueryable<Cliente> query = _contexto.Cliente;
+
+            query = query.AsNoTracking().OrderBy(x => x.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Cliente> GetClienteByIdAsync(int clienteId)
+        {
+            IQueryable<Cliente> query = _contexto.Cliente;
+
+            query = query.AsNoTracking().OrderBy(x => x.Id)
+            .Where(x => x.Id == clienteId);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

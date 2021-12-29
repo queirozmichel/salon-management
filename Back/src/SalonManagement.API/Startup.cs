@@ -33,6 +33,8 @@ namespace SalonManagement.API
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IServicoService, ServicoService>();
+            services.AddScoped<IClienteService, ClienteService>();
+
             services.AddScoped<ISalonManagementPersist, SalonManagementPersist>();
 
 
