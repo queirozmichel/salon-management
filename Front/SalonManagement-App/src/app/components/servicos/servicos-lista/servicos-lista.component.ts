@@ -13,6 +13,7 @@ import { ServicoService } from 'src/app/services/servico.service';
 })
 export class ServicosListaComponent implements OnInit {
   public servicos: Servico[] = [];
+  public servicoId: number = 0;
   private _filtroTabela: string = '';
   public servicosFiltrados: Servico[] = [];
   modalRef?: BsModalRef;
@@ -38,16 +39,41 @@ export class ServicosListaComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.getServicos();
+    this.carregarServicos();
   }
 
-  public openModal(template: TemplateRef<any>): void {
+  public openModal(
+    event: any,
+    servicoId: number,
+    template: TemplateRef<any>
+  ): void {
+    this.servicoId = servicoId;
+    event.stopPropagation();
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   public confirmarExclusao(): void {
     this.modalRef?.hide();
-    this.toastr.success('O serviço foi excluído.', 'Sucesso!');
+    this.spinner.show();
+    this.servicoService.deleteServico(this.servicoId).subscribe(
+      (resultado: any) => {
+        console.log(resultado);
+        this.toastr.success('O serviço foi excluído.', 'Sucesso!');
+        this.spinner.hide();
+        this.carregarServicos();
+      },
+      (error: any) => {
+        console.error(error);
+        this.toastr.error(
+          `Erro ao tentar apagar o serviço de código ${this.servicoId}.`,
+          'Erro!'
+        );
+        this.spinner.hide();
+      },
+      () => {
+        this.spinner.hide();
+      }
+    );
   }
 
   public negarExclusao(): void {
@@ -63,7 +89,7 @@ export class ServicosListaComponent implements OnInit {
     );
   }
 
-  public getServicos(): void {
+  public carregarServicos(): void {
     this.spinner.show();
     this.servicoService.getServicos().subscribe({
       next: (resposta: Servico[]) => {
@@ -72,7 +98,7 @@ export class ServicosListaComponent implements OnInit {
       error: (erro: any) => {
         this.spinner.hide();
         console.error(erro);
-        this.toastr.error('Impossível carregar os serviços.', 'Erro!');
+        this.toastr.error('Erro ao tentar carregar os serviços.', 'Erro!');
       },
       complete: () => {
         this.spinner.hide();

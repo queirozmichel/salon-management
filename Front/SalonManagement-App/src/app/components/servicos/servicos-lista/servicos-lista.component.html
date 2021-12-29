@@ -26,21 +26,25 @@
       </tr>
     </thead>
     <tbody class="text-center" *ngIf="servicos && servicos.length">
-      <tr style="cursor: pointer" *ngFor="let servico of servicosFiltrados">
-        <th (click)="detalheServico(servico.id)" class="d-none d-md-table-cell">
+      <tr
+        style="cursor: pointer"
+        *ngFor="let servico of servicosFiltrados"
+        (click)="detalheServico(servico.id)"
+      >
+        <th class="d-none d-md-table-cell">
           {{ servico.id }}
         </th>
-        <td (click)="detalheServico(servico.id)">{{ servico.cliente.nome }}</td>
-        <td (click)="detalheServico(servico.id)">
+        <td>{{ servico.cliente.nome }}</td>
+        <td>
           {{ servico.profissional.nome }}
         </td>
-        <td (click)="detalheServico(servico.id)">
+        <td>
           {{ servico.data | date: "dd/MM/yyy HH:mm":"":"" }}
         </td>
-        <td (click)="detalheServico(servico.id)" class="d-none d-md-table-cell">
+        <td class="d-none d-md-table-cell">
           {{ servico.descricao }}
         </td>
-        <td (click)="detalheServico(servico.id)" class="d-none d-sm-table-cell">
+        <td class="d-none d-sm-table-cell">
           {{ servico.valor }}
         </td>
         <td class="colunaApagar">
@@ -48,7 +52,7 @@
             type="button"
             class="btn btn-danger btn-sm"
             tooltip="Apagar"
-            (click)="openModal(template)"
+            (click)="openModal($event, servico.id, template)"
           >
             <i class="fas fa-trash iconeDeLixo"></i>
           </button>
@@ -67,7 +71,7 @@
 
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>Tem certeza que quer apagar?</p>
+    <p>Apagar o serviço de código {{ this.servicoId }}?</p>
     <button type="button" class="btn btn-default" (click)="confirmarExclusao()">
       Sim
     </button>

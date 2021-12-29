@@ -134,7 +134,7 @@ namespace SalonManagement.API.Controllers
 
                 if (await _servicoService.DeleteServico(id))
                 {
-                    return Ok("Deletado.");
+                    return Ok(new { mensagem = "Deletado" });
                 }
                 else
                 {

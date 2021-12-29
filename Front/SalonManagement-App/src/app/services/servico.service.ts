@@ -11,10 +11,24 @@ export class ServicoService {
   public getServicos(): Observable<Servico[]> {
     return this.clienteHttp.get<Servico[]>(this.baseURL);
   }
+
   public getServicosByData(data: string): Observable<Servico[]> {
     return this.clienteHttp.get<Servico[]>(`${this.baseURL}/data/${data}`);
   }
+
   public getServicoById(id: number): Observable<Servico> {
     return this.clienteHttp.get<Servico>(`${this.baseURL}/${id}`);
+  }
+
+  public postServico(servico: Servico): Observable<Servico> {
+    return this.clienteHttp.post<Servico>(this.baseURL, servico);
+  }
+
+  public putServico(id: number, servico: Servico): Observable<Servico> {
+    return this.clienteHttp.put<Servico>(`${this.baseURL}/${id}`, servico);
+  }
+
+  public deleteServico(id: number): Observable<any> {
+    return this.clienteHttp.delete(`${this.baseURL}/${id}`);
   }
 }
