@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Servico } from 'src/app/models/Servico';
+import { ServicoService } from 'src/app/services/servico.service';
 
 @Component({
   selector: 'app-servico-detalhe',
@@ -12,24 +11,70 @@ import {
   styleUrls: ['./servico-detalhe.component.scss'],
 })
 export class ServicoDetalheComponent implements OnInit {
+  servico: Servico = {} as Servico;
+  servicos: Servico[] = [];
   formulario: FormGroup = {} as FormGroup;
 
   get f(): any {
     return this.formulario.controls;
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: ActivatedRoute,
+    private servicoService: ServicoService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
+    this.carregarServico();
+    this.pegaNomes();
     this.validacao();
+  }
+
+  public carregarServico(): void {
+    this.spinner.show();
+    const servicoIdParam = this.router.snapshot.paramMap.get('id');
+    if (servicoIdParam != null) {
+      this.servicoService.getServicoById(+servicoIdParam).subscribe({
+        next: (_servico: Servico) => {
+          this.servico = { ..._servico };
+          this.formulario.patchValue(this.servico);
+        },
+        error: (error: any) => {
+          console.error(error);
+          this.spinner.hide();
+        },
+        complete: () => {
+          this.spinner.hide();
+        },
+      });
+    }
+    this.spinner.hide();
+  }
+
+  public pegaNomes(): void {
+    this.servicoService.getServicos().subscribe({
+      next: (resposta: Servico[]) => {
+        this.servicos = resposta;
+      },
+      error: (erro: any) => {
+        console.error(erro);
+      },
+      complete: () => {},
+    });
   }
 
   public validacao(): void {
     this.formulario = this.formBuilder.group({
-      cliente: ['', Validators.required],
-      profissional: ['', Validators.required],
+      cliente: this.formBuilder.group({
+        nome: ['', Validators.required],
+      }),
+      profissional: this.formBuilder.group({
+        nome: ['', Validators.required],
+      }),
       data: ['', Validators.required],
-      valor: ['', Validators.required],
+      valor: [''],
       descricao: [
         '',
         [
@@ -40,7 +85,6 @@ export class ServicoDetalheComponent implements OnInit {
       ],
     });
   }
-
   public resetarFormulario(): void {
     this.formulario.reset();
   }

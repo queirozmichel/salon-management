@@ -26,17 +26,23 @@
       </tr>
     </thead>
     <tbody class="text-center" *ngIf="servicos && servicos.length">
-      <tr
-        style="cursor: pointer"
-        *ngFor="let servico of servicosFiltrados"
-        (click)="detalheServico(servico.id)"
-      >
-        <th class="d-none d-md-table-cell">{{ servico.id }}</th>
-        <td>{{ servico.cliente.nome }}</td>
-        <td>{{ servico.profissional.nome }}</td>
-        <td>{{ servico.data }}</td>
-        <td class="d-none d-md-table-cell">{{ servico.descricao }}</td>
-        <td class="d-none d-sm-table-cell">{{ servico.valor }}</td>
+      <tr style="cursor: pointer" *ngFor="let servico of servicosFiltrados">
+        <th (click)="detalheServico(servico.id)" class="d-none d-md-table-cell">
+          {{ servico.id }}
+        </th>
+        <td (click)="detalheServico(servico.id)">{{ servico.cliente.nome }}</td>
+        <td (click)="detalheServico(servico.id)">
+          {{ servico.profissional.nome }}
+        </td>
+        <td (click)="detalheServico(servico.id)">
+          {{ servico.data | date: "dd/MM/yyy HH:mm":"":"" }}
+        </td>
+        <td (click)="detalheServico(servico.id)" class="d-none d-md-table-cell">
+          {{ servico.descricao }}
+        </td>
+        <td (click)="detalheServico(servico.id)" class="d-none d-sm-table-cell">
+          {{ servico.valor }}
+        </td>
         <td class="colunaApagar">
           <button
             type="button"
@@ -52,7 +58,7 @@
     <tfoot *ngIf="servicos.length == 0">
       <tr>
         <td colspan="8" class="text-center">
-          <h4>Nenhum serviço encontrado</h4>
+          <!-- <h4>Nenhum serviço encontrado</h4> -->
         </td>
       </tr>
     </tfoot>

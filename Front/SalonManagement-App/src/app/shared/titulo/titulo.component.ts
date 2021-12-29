@@ -17,7 +17,6 @@ export class TituloComponent implements OnInit {
   ngOnInit() {}
 
   public listar(): void {
-    // this.rota.navigate([`/${this.titulo.toLocaleLowerCase()}/lista`]);
     this.rota.navigate([
       `/${this.titulo
         .normalize('NFD')

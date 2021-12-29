@@ -8,6 +8,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { ProdutosComponent } from './components/produtos/produtos.component';
@@ -59,6 +60,7 @@ import { RegistrarComponent } from './components/usuario/registrar/registrar.com
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     NgxSpinnerModule,
+    NgxCurrencyModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

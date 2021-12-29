@@ -1,49 +1,52 @@
 <div class="card rounded bg-light shadow-sm">
   <form [formGroup]="formulario">
+    <!-- <p>Form value: {{ formulario.value | json }}</p>
+    <p>Form valid: {{ formulario.status | json }}</p> -->
     <div class="row p-4">
       <div class="col-md-8">
-        <div class="col-md">
+        <div class="col-md" formGroupName="cliente">
           <label class="form-label">Cliente</label>
-          <select
-            class="form-select"
-            formControlName="cliente"
-            [ngClass]="{
-              'is-invalid': f.cliente.errors && f.cliente.touched
-            }"
-          >
-            <option selected></option>
-            <option>...</option>
-            <option>...</option>
+          <select class="form-select" formControlName="nome">
+            <option *ngIf="servico.id != null" value="" disabled>
+              {{ servico.cliente.nome }}
+            </option>
+
+            <option *ngFor="let item of servicos" [value]="item.cliente.nome">
+              {{ item.cliente.nome }}
+            </option>
           </select>
-          <div class="invalid-feedback">Cliente é obrigatório</div>
         </div>
-        <div class="col-md mt-2">
+
+        <div class="col-md mt-2" formGroupName="profissional">
           <label class="form-label">Profissional</label>
-          <select
-            class="form-select"
-            formControlName="profissional"
-            [ngClass]="{
-              'is-invalid': f.profissional.errors && f.profissional.touched
-            }"
-          >
-            <option selected></option>
-            <option>...</option>
+          <select class="form-select" formControlName="nome">
+            <option *ngIf="servico.id != null" value="" disabled>
+              {{ servico.profissional.nome }}
+            </option>
+
+            <option
+              *ngFor="let item of servicos"
+              [value]="item.profissional.nome"
+            >
+              {{ item.profissional.nome }}
+            </option>
           </select>
-          <div class="invalid-feedback">Profissional é obrigatório</div>
         </div>
 
         <div class="row">
           <div class="col-md mt-2">
             <label class="form-label">Data</label>
             <input
-              type="text"
+              type="datetime-local"
               class="form-control"
               formControlName="data"
               [ngClass]="{
                 'is-invalid': f.data.errors && f.data.touched
               }"
             />
-            <div class="invalid-feedback">Data é obrigatório</div>
+            <div *ngIf="f.data.errors?.required" class="invalid-feedback">
+              Data é obrigatório
+            </div>
           </div>
 
           <div class="col-md mt-2">
@@ -52,11 +55,14 @@
               type="text"
               class="form-control"
               formControlName="valor"
-              [ngClass]="{
-                'is-invalid': f.valor.errors && f.valor.touched
+              currencyMask
+              [options]="{
+                align: 'left',
+                prefix: 'R$ ',
+                thousands: '.',
+                decimal: ','
               }"
             />
-            <div class="invalid-feedback">Valor é obrigatório</div>
           </div>
         </div>
       </div>

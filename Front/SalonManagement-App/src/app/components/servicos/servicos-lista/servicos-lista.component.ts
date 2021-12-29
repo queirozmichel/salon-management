@@ -64,6 +64,7 @@ export class ServicosListaComponent implements OnInit {
   }
 
   public getServicos(): void {
+    this.spinner.show();
     this.servicoService.getServicos().subscribe({
       next: (resposta: Servico[]) => {
         (this.servicos = resposta), (this.servicosFiltrados = this.servicos);
