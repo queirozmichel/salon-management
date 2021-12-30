@@ -1,1 +1,8 @@
-<app-titulo [titulo]="'Clientes'" [iconeTitulo]="'fas fa-users'"></app-titulo>
+<app-titulo
+  [titulo]="'Clientes'"
+  [iconeTitulo]="'fas fa-users'"
+  [textoBotaoNovo]="'Cliente'"
+  [botaoListar]="botaoNovo()"
+  [botaoNovo]="botaoListar()"
+></app-titulo>
+<router-outlet></router-outlet>

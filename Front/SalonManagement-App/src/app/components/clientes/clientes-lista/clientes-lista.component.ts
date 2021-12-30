@@ -3,19 +3,19 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Servico } from 'src/app/models/Servico';
-import { ServicoService } from 'src/app/services/servico.service';
+import { Cliente } from 'src/app/models/Cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
-  selector: 'app-servicos-lista',
-  templateUrl: './servicos-lista.component.html',
-  styleUrls: ['./servicos-lista.component.scss'],
+  selector: 'app-clientes-lista',
+  templateUrl: './clientes-lista.component.html',
+  styleUrls: ['./clientes-lista.component.scss'],
 })
-export class ServicosListaComponent implements OnInit {
-  public servicos: Servico[] = [];
-  public servicoId: number = 0;
+export class ClientesListaComponent implements OnInit {
+  public clientes: Cliente[] = [];
+  public clienteId: number = 0;
   private _filtroTabela: string = '';
-  public servicosFiltrados: Servico[] = [];
+  public clientesFiltrados: Cliente[] = [];
   modalRef?: BsModalRef;
 
   public get filtroTabela(): string {
@@ -24,13 +24,13 @@ export class ServicosListaComponent implements OnInit {
 
   public set filtroTabela(value: string) {
     this._filtroTabela = value;
-    this.servicosFiltrados = this.filtroTabela
-      ? this.filtrarServicos(this.filtroTabela)
-      : this.servicos;
+    this.clientesFiltrados = this.filtroTabela
+      ? this.filtrarClientes(this.filtroTabela)
+      : this.clientes;
   }
 
   constructor(
-    private servicoService: ServicoService,
+    private clienteService: ClienteService,
     private modalService: BsModalService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
@@ -39,15 +39,15 @@ export class ServicosListaComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.carregarServicos();
+    this.carregarClientes();
   }
 
   public openModal(
     event: any,
-    servicoId: number,
+    clienteId: number,
     template: TemplateRef<any>
   ): void {
-    this.servicoId = servicoId;
+    this.clienteId = clienteId;
     event.stopPropagation();
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
@@ -55,17 +55,17 @@ export class ServicosListaComponent implements OnInit {
   public confirmarExclusao(): void {
     this.modalRef?.hide();
     this.spinner.show();
-    this.servicoService.deleteServico(this.servicoId).subscribe(
+    this.clienteService.deleteCliente(this.clienteId).subscribe(
       (resultado: any) => {
         console.log(resultado);
-        this.toastr.success('O serviço foi excluído.', 'Sucesso!');
+        this.toastr.success('O cliente foi excluído.', 'Sucesso!');
         this.spinner.hide();
-        this.carregarServicos();
+        this.carregarClientes();
       },
       (error: any) => {
         console.error(error);
         this.toastr.error(
-          `Erro ao tentar apagar o serviço de código ${this.servicoId}.`,
+          `Erro ao tentar apagar o cliente de código ${this.clienteId}.`,
           'Erro!'
         );
         this.spinner.hide();
@@ -80,32 +80,31 @@ export class ServicosListaComponent implements OnInit {
     this.modalRef?.hide();
   }
 
-  public filtrarServicos(filtro: string): Servico[] {
+  public filtrarClientes(filtro: string): Cliente[] {
     filtro = filtro.toLocaleLowerCase();
-    return this.servicos.filter(
-      (servico: any) =>
-        servico.descricao.toLocaleLowerCase().indexOf(filtro) !== -1 ||
-        servico.data.toLocaleLowerCase().indexOf(filtro) !== -1
+    return this.clientes.filter(
+      (cliente: any) => cliente.nome.toLocaleLowerCase().indexOf(filtro) !== -1
     );
   }
 
-  public carregarServicos(): void {
+  public carregarClientes(): void {
     this.spinner.show();
-    this.servicoService.getServicos().subscribe({
-      next: (resposta: Servico[]) => {
-        (this.servicos = resposta), (this.servicosFiltrados = this.servicos);
+    this.clienteService.getClientes().subscribe({
+      next: (resposta: Cliente[]) => {
+        (this.clientes = resposta), (this.clientesFiltrados = this.clientes);
+        console.log(this.clientes);
       },
       error: (erro: any) => {
         this.spinner.hide();
         console.error(erro);
-        this.toastr.error('Erro ao tentar carregar os serviços.', 'Erro!');
+        this.toastr.error('Erro ao tentar carregar os clientes.', 'Erro!');
       },
       complete: () => {
         this.spinner.hide();
       },
     });
   }
-  public detalheServico(servicoId: number): void {
-    this.router.navigate([`servicos/detalhe/${servicoId}`]);
+  public detalheCliente(clienteId: number): void {
+    this.router.navigate([`clientes/detalhe/${clienteId}`]);
   }
 }

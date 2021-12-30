@@ -5,13 +5,13 @@
       <h2>{{ titulo }}</h2>
     </div>
   </div>
-  <div class="d-flex align-items-center" *ngIf="botaoListarServicos == true">
-    <a class="d-flex btn btn-dark me-2" routerLink="/servicos/detalhe">
+  <div class="d-flex align-items-center" *ngIf="botaoListar == true">
+    <a class="d-flex btn btn-dark me-2" (click)="novo()">
       <i class="fa fa-plus-circle mx-1 my-1"></i>
-      <i class="textoBotao d-none d-md-block">Novo Serviço</i>
+      <i class="textoBotao d-none d-md-block">Novo {{ textoBotaoNovo }}</i>
     </a>
   </div>
-  <div class="d-flex align-items-center" *ngIf="botaoNovoServico == true">
+  <div class="d-flex align-items-center" *ngIf="botaoNovo == true">
     <a class="d-flex btn btn-dark me-2" (click)="listar()">
       <i class="fas fa-list mx-1 my-1"></i>
       <i class="textoBotao d-none d-md-block">Listar {{ titulo }}</i>

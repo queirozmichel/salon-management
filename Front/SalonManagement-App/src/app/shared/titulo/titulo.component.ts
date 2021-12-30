@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
 export class TituloComponent implements OnInit {
   @Input() titulo: string = '';
   @Input() iconeTitulo: string = '';
-  @Input() botaoListarServicos: boolean = false;
-  @Input() botaoNovoServico: boolean = false;
+  @Input() textoBotaoNovo: string = '';
+  @Input() botaoListar: boolean = false;
+  @Input() botaoNovo: boolean = false;
 
   constructor(private rota: Router) {}
 
@@ -22,6 +23,15 @@ export class TituloComponent implements OnInit {
         .normalize('NFD')
         .replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '')
         .toLocaleLowerCase()}/lista`,
+    ]);
+  }
+
+  public novo(): void {
+    this.rota.navigate([
+      `/${this.titulo
+        .normalize('NFD')
+        .replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '')
+        .toLocaleLowerCase()}/detalhe`,
     ]);
   }
 }

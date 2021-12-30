@@ -6,29 +6,29 @@ import { Servico } from '../models/Servico';
 @Injectable()
 export class ServicoService {
   baseURL = 'https://localhost:5001/api/servicos';
-  constructor(private clienteHttp: HttpClient) {}
+  constructor(private Http: HttpClient) {}
 
   public getServicos(): Observable<Servico[]> {
-    return this.clienteHttp.get<Servico[]>(this.baseURL);
+    return this.Http.get<Servico[]>(this.baseURL);
   }
 
   public getServicosByData(data: string): Observable<Servico[]> {
-    return this.clienteHttp.get<Servico[]>(`${this.baseURL}/data/${data}`);
+    return this.Http.get<Servico[]>(`${this.baseURL}/data/${data}`);
   }
 
   public getServicoById(id: number): Observable<Servico> {
-    return this.clienteHttp.get<Servico>(`${this.baseURL}/${id}`);
+    return this.Http.get<Servico>(`${this.baseURL}/${id}`);
   }
 
   public postServico(servico: Servico): Observable<Servico> {
-    return this.clienteHttp.post<Servico>(this.baseURL, servico);
+    return this.Http.post<Servico>(this.baseURL, servico);
   }
 
   public putServico(id: number, servico: Servico): Observable<Servico> {
-    return this.clienteHttp.put<Servico>(`${this.baseURL}/${id}`, servico);
+    return this.Http.put<Servico>(`${this.baseURL}/${id}`, servico);
   }
 
   public deleteServico(id: number): Observable<any> {
-    return this.clienteHttp.delete(`${this.baseURL}/${id}`);
+    return this.Http.delete(`${this.baseURL}/${id}`);
   }
 }

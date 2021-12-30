@@ -11,6 +11,8 @@ import { ServicosComponent } from './components/servicos/servicos.component';
 import { LoginComponent } from './components/usuario/login/login.component';
 import { RegistrarComponent } from './components/usuario/registrar/registrar.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { ClienteDetalheComponent } from './components/clientes/cliente-detalhe/cliente-detalhe.component';
+import { ClientesListaComponent } from './components/clientes/clientes-lista/clientes-lista.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,7 @@ const routes: Routes = [
   },
   { path: 'usuario/perfil', component: PerfilComponent },
   { path: 'servicos', redirectTo: 'servicos/lista' },
+  { path: 'clientes', redirectTo: 'clientes/lista' },
   {
     path: 'servicos',
     component: ServicosComponent,
@@ -32,10 +35,18 @@ const routes: Routes = [
       { path: 'lista', component: ServicosListaComponent },
     ],
   },
+  {
+    path: 'clientes',
+    component: ClientesComponent,
+    children: [
+      { path: 'detalhe/:id', component: ClienteDetalheComponent },
+      { path: 'detalhe', component: ClienteDetalheComponent },
+      { path: 'lista', component: ClientesListaComponent },
+    ],
+  },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'produtos', component: ProdutosComponent },
   { path: 'profissionais', component: ProfissionaisComponent },
-  { path: 'clientes', component: ClientesComponent },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },

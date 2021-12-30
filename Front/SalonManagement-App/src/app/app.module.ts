@@ -30,6 +30,9 @@ import { ServicosListaComponent } from './components/servicos/servicos-lista/ser
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { LoginComponent } from './components/usuario/login/login.component';
 import { RegistrarComponent } from './components/usuario/registrar/registrar.component';
+import { ClientesListaComponent } from './components/clientes/clientes-lista/clientes-lista.component';
+import { ClienteDetalheComponent } from './components/clientes/cliente-detalhe/cliente-detalhe.component';
+import { ClienteService } from './services/cliente.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { RegistrarComponent } from './components/usuario/registrar/registrar.com
     ServicoDetalheComponent,
     ProdutosComponent,
     ClientesComponent,
+    ClientesListaComponent,
+    ClienteDetalheComponent,
     ProfissionaisComponent,
     PerfilComponent,
     UsuarioComponent,
@@ -68,7 +73,7 @@ import { RegistrarComponent } from './components/usuario/registrar/registrar.com
       progressBar: true,
     }),
   ],
-  providers: [ServicoService],
+  providers: [ServicoService, ClienteService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
