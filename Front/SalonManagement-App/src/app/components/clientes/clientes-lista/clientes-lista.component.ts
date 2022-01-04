@@ -92,7 +92,6 @@ export class ClientesListaComponent implements OnInit {
     this.clienteService.getClientes().subscribe({
       next: (resposta: Cliente[]) => {
         (this.clientes = resposta), (this.clientesFiltrados = this.clientes);
-        console.log(this.clientes);
       },
       error: (erro: any) => {
         this.spinner.hide();

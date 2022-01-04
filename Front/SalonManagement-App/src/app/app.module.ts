@@ -1,5 +1,7 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -9,6 +11,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { ProdutosComponent } from './components/produtos/produtos.component';
@@ -33,6 +36,8 @@ import { RegistrarComponent } from './components/usuario/registrar/registrar.com
 import { ClientesListaComponent } from './components/clientes/clientes-lista/clientes-lista.component';
 import { ClienteDetalheComponent } from './components/clientes/cliente-detalhe/cliente-detalhe.component';
 import { ClienteService } from './services/cliente.service';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -72,8 +77,13 @@ import { ClienteService } from './services/cliente.service';
       preventDuplicates: true,
       progressBar: true,
     }),
+    NgxMaskModule.forRoot(),
   ],
-  providers: [ServicoService, ClienteService],
+  providers: [
+    ServicoService,
+    ClienteService,
+    { provide: LOCALE_ID, useValue: 'pt' },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

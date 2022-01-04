@@ -35,10 +35,10 @@
         </th>
         <td>{{ cliente.nome }}</td>
         <td>
-          {{ cliente.cpf }}
+          {{ cliente.cpf | mask: "000.000.000-00" }}
         </td>
         <td>
-          {{ cliente.telefone }}
+          {{ cliente.telefone | mask: "(00)00000-0000" }}
         </td>
         <td class="d-none d-md-table-cell">
           {{ cliente.endereco }}

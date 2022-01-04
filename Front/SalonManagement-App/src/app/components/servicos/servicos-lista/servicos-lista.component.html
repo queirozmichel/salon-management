@@ -45,7 +45,7 @@
           {{ servico.descricao }}
         </td>
         <td class="d-none d-sm-table-cell">
-          {{ servico.valor }}
+          {{ servico.valor | currency: "BRL" }}
         </td>
         <td class="colunaApagar">
           <button

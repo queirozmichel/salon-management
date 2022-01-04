@@ -60,7 +60,7 @@ export class ServicoDetalheComponent implements OnInit {
     // this.spinner.show();
     if (this.formulario.valid) {
       this.servico = { ...this.formulario.value };
-      console.log(this.servico);
+      // console.log(this.servico);
 
       // this.servicoService.postServico(this.servico).subscribe(
       //   () => this.toaster.success('Serviço salvo com sucesso.', 'Sucesso!'),
@@ -78,8 +78,6 @@ export class ServicoDetalheComponent implements OnInit {
     this.servicoService.getServicos().subscribe({
       next: (resposta: Servico[]) => {
         this.servicos = resposta;
-
-        console.log(this.servicos);
       },
       error: (erro: any) => {
         console.error(erro);
