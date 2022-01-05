@@ -139,5 +139,34 @@ namespace SalonManagement.Persistence
 
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task<Profissional[]> GetAllProfissionaisByNameAsync(string nome)
+        {
+            IQueryable<Profissional> query = _contexto.Profissional;
+
+            query = query.AsNoTracking().OrderBy(x => x.Id)
+            .Where(x => x.Nome.ToLower().Contains(nome.ToLower()));
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Profissional[]> GetAllProfissionaisAsync()
+        {
+            IQueryable<Profissional> query = _contexto.Profissional;
+
+            query = query.AsNoTracking().OrderBy(x => x.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Profissional> GetProfissionalByIdAsync(int profissionalId)
+        {
+            IQueryable<Profissional> query = _contexto.Profissional;
+
+            query = query.AsNoTracking().OrderBy(x => x.Id)
+            .Where(x => x.Id == profissionalId);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

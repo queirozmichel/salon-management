@@ -31,5 +31,11 @@ namespace SalonManagement.Persistence.Contratos
         Task<Cliente[]> GetAllClientesAsync();
         Task<Cliente> GetClienteByIdAsync(int clienteId);
 
+        //PROFISSIONAIS
+
+        Task<Profissional[]> GetAllProfissionaisByNameAsync(string nome);
+        Task<Profissional[]> GetAllProfissionaisAsync();
+        Task<Profissional> GetProfissionalByIdAsync(int profissionalId);
+
     }
 }

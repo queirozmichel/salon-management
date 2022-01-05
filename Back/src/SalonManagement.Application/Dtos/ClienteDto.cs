@@ -17,7 +17,11 @@ namespace SalonManagement.Application.Dtos
         MinLength(11, ErrorMessage = "Deve ter 11 caracteres"),
         MaxLength(11, ErrorMessage = "Deve ter 11 caracteres")]
         public string CPF { get; set; }
+
+        [Required(ErrorMessage = "Preenchimento obrigatório")]
         public string Endereco { get; set; }
+
+        [Required(ErrorMessage = "Preenchimento obrigatório")]
         public string Telefone { get; set; }
     }
 }

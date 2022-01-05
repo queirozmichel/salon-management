@@ -19,7 +19,6 @@ namespace SalonManagement.Application.Dtos
          MaxLength(100, ErrorMessage = "Deve ter no máximo 100 caracteres")]
         public string Descricao { get; set; }
 
-        [Required(ErrorMessage = "Preenchimento obrigatório")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Preenchimento obrigatório")]
