@@ -36,6 +36,8 @@ import { RegistrarComponent } from './components/usuario/registrar/registrar.com
 import { ClientesListaComponent } from './components/clientes/clientes-lista/clientes-lista.component';
 import { ClienteDetalheComponent } from './components/clientes/cliente-detalhe/cliente-detalhe.component';
 import { ClienteService } from './services/cliente.service';
+import { ProfissionaisListaComponent } from './components/profissionais/profissionais-lista/profissionais-lista.component';
+import { ProfissionalService } from './services/profissional.service';
 
 registerLocaleData(ptBr);
 
@@ -50,6 +52,7 @@ registerLocaleData(ptBr);
     ClientesListaComponent,
     ClienteDetalheComponent,
     ProfissionaisComponent,
+    ProfissionaisListaComponent,
     PerfilComponent,
     UsuarioComponent,
     LoginComponent,
@@ -82,6 +85,7 @@ registerLocaleData(ptBr);
   providers: [
     ServicoService,
     ClienteService,
+    ProfissionalService,
     { provide: LOCALE_ID, useValue: 'pt' },
   ],
   bootstrap: [AppComponent],

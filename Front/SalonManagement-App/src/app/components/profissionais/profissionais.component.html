@@ -1,4 +1,8 @@
 <app-titulo
   [titulo]="'Profissionais'"
   [iconeTitulo]="'fas fa-user-friends'"
+  [textoBotaoNovo]="'Profissional'"
+  [botaoListar]="botaoNovo()"
+  [botaoNovo]="botaoListar()"
 ></app-titulo>
+<router-outlet></router-outlet>

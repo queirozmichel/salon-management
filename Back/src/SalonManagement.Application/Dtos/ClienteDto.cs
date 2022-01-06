@@ -10,18 +10,22 @@ namespace SalonManagement.Application.Dtos
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Preenchimento obrigatório")]
+        [Required(ErrorMessage = "Preenchimento obrigatório"),
+        MinLength(5, ErrorMessage = "Deve ter no mínimo 5 caracteres"),
+        MaxLength(25, ErrorMessage = "Deve ter no máximo 25 caracteres")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Preenchimento obrigatório"),
-        MinLength(11, ErrorMessage = "Deve ter 11 caracteres"),
-        MaxLength(11, ErrorMessage = "Deve ter 11 caracteres")]
+        [Required(ErrorMessage = "Preenchimento obrigatório")]
+        [RegularExpression("([0-9]{11})", ErrorMessage = "Deve conter 11 dígitos numéricos")]
         public string CPF { get; set; }
 
-        [Required(ErrorMessage = "Preenchimento obrigatório")]
+        [Required(ErrorMessage = "Preenchimento obrigatório"),
+        MinLength(5, ErrorMessage = "Deve ter no mínimo 5 caracteres"),
+        MaxLength(25, ErrorMessage = "Deve ter no máximo 50 caracteres")]
         public string Endereco { get; set; }
 
         [Required(ErrorMessage = "Preenchimento obrigatório")]
+        [RegularExpression("([0-9]{11})", ErrorMessage = "Deve conter 11 dígitos numéricos")]
         public string Telefone { get; set; }
     }
 }

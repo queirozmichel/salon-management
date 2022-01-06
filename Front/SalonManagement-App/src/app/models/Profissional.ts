@@ -1,7 +1,8 @@
 export interface Profissional {
   id: number;
   nome: string;
-  CPF: string;
+  cpf: string;
+  endereco: string;
   telefone: string;
   especialidade: string;
 }

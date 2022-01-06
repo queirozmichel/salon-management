@@ -1,3 +1,76 @@
-<p>
-  profissionais-lista works!
-</p>
+<div class="card bg-light rounded shadow-sm p-4">
+  <div class="my-4">
+    <div class="col-12 input-group">
+      <span class="input-group-text"
+        ><i class="fas fa-search iconeDeBusca"></i
+      ></span>
+      <input
+        [(ngModel)]="filtroTabela"
+        type="text"
+        class="form-control campoDeBusca"
+        placeholder="Buscar por nome"
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder ='Buscar por nome'"
+      />
+    </div>
+  </div>
+  <table class="table">
+    <thead class="text-center cabecalho">
+      <tr>
+        <th class="d-none d-md-table-cell" scope="col">Código</th>
+        <th scope="col">Nome</th>
+        <th scope="col">CPF</th>
+        <th scope="col">Telefone</th>
+        <th class="d-none d-md-table-cell" scope="col">Especialidade</th>
+      </tr>
+    </thead>
+    <tbody class="text-center" *ngIf="profissionais && profissionais.length">
+      <tr
+        style="cursor: pointer"
+        *ngFor="let profissional of profissionaisFiltrados"
+        (click)="detalheProfissional(profissional.id)"
+      >
+        <th class="d-none d-md-table-cell">
+          {{ profissional.id }}
+        </th>
+        <td>{{ profissional.nome }}</td>
+        <td>
+          {{ profissional.cpf | mask: "000.000.000-00" }}
+        </td>
+        <td>
+          {{ profissional.telefone | mask: "(00)00000-0000" }}
+        </td>
+        <td class="d-none d-md-table-cell">
+          {{ profissional.especialidade }}
+        </td>
+        <td class="colunaApagar">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            tooltip="Apagar"
+            (click)="openModal($event, profissional.id, template)"
+          >
+            <i class="fas fa-trash iconeDeLixo"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="profissionais.length == 0">
+      <tr>
+        <td colspan="8" class="text-center"></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Apagar o cliente de código {{ this.profissionalId }}?</p>
+    <button type="button" class="btn btn-default" (click)="confirmarExclusao()">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="negarExclusao()">
+      Não
+    </button>
+  </div>
+</ng-template>

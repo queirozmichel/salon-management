@@ -13,6 +13,8 @@ import { RegistrarComponent } from './components/usuario/registrar/registrar.com
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ClienteDetalheComponent } from './components/clientes/cliente-detalhe/cliente-detalhe.component';
 import { ClientesListaComponent } from './components/clientes/clientes-lista/clientes-lista.component';
+import { ProfissionalDetalheComponent } from './components/profissionais/profissional-detalhe/profissional-detalhe.component';
+import { ProfissionaisListaComponent } from './components/profissionais/profissionais-lista/profissionais-lista.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,7 @@ const routes: Routes = [
   { path: 'usuario/perfil', component: PerfilComponent },
   { path: 'servicos', redirectTo: 'servicos/lista' },
   { path: 'clientes', redirectTo: 'clientes/lista' },
+  { path: 'profissionais', redirectTo: 'profissionais/lista' },
   {
     path: 'servicos',
     component: ServicosComponent,
@@ -44,6 +47,17 @@ const routes: Routes = [
       { path: 'lista', component: ClientesListaComponent },
     ],
   },
+
+  {
+    path: 'profissionais',
+    component: ProfissionaisComponent,
+    children: [
+      { path: 'detalhe/:id', component: ProfissionalDetalheComponent },
+      { path: 'detalhe', component: ProfissionalDetalheComponent },
+      { path: 'lista', component: ProfissionaisListaComponent },
+    ],
+  },
+
   { path: 'dashboard', component: DashboardComponent },
   { path: 'produtos', component: ProdutosComponent },
   { path: 'profissionais', component: ProfissionaisComponent },
