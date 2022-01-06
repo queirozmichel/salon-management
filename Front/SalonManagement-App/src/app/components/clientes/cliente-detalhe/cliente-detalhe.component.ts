@@ -13,7 +13,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class ClienteDetalheComponent implements OnInit {
   cliente: Cliente = {} as Cliente;
-  servicos: Cliente[] = [];
+  clientes: Cliente[] = [];
   formulario: FormGroup = {} as FormGroup;
 
   get f(): any {

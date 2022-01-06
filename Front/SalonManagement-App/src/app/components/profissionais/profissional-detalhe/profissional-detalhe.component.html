@@ -1,3 +1,150 @@
-<p>
-  profissional-detalhe works!
-</p>
+<div class="card rounded bg-light shadow-sm">
+  <form [formGroup]="formulario">
+    <!-- <p>Form value: {{ formulario.value | json }}</p>
+    <p>Form valid: {{ formulario.status | json }}</p> -->
+    <div class="row p-4">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md mt-2">
+            <label class="form-label">Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nome"
+              [ngClass]="{
+                'is-invalid': f.nome.errors && f.nome.touched
+              }"
+            />
+            <div *ngIf="f.nome.errors?.required" class="invalid-feedback">
+              Nome é obrigatório
+            </div>
+            <div *ngIf="f.nome.errors?.minlength" class="invalid-feedback">
+              Deve ter no mínimo 5 caracteres
+            </div>
+            <div *ngIf="f.nome.errors?.maxlength" class="invalid-feedback">
+              Deve ter no máximo 25 caracteres
+            </div>
+          </div>
+          <div class="col-md mt-2">
+            <label class="form-label">CPF</label>
+            <input
+              type="text"
+              mask="000.000.000-00"
+              class="form-control"
+              formControlName="cpf"
+              [ngClass]="{
+                'is-invalid': f.cpf.errors && f.cpf.touched
+              }"
+            />
+            <div *ngIf="f.cpf.errors?.required" class="invalid-feedback">
+              CPF é obrigatório
+            </div>
+            <div *ngIf="f.cpf.errors?.minlength" class="invalid-feedback">
+              Deve conter 11 dígitos
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md mt-2">
+          <label class="form-label">Endereço</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="endereco"
+            [ngClass]="{
+              'is-invalid': f.endereco.errors && f.endereco.touched
+            }"
+          />
+          <div *ngIf="f.endereco.errors?.required" class="invalid-feedback">
+            Endereço é obrigatório
+          </div>
+          <div *ngIf="f.endereco.errors?.minlength" class="invalid-feedback">
+            Deve ter no mínimo 5 caracteres
+          </div>
+          <div *ngIf="f.endereco.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 50 caracteres
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md mt-2">
+            <label class="form-label">Especialidade</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="especialidade"
+              [ngClass]="{
+                'is-invalid': f.especialidade.errors && f.especialidade.touched
+              }"
+            />
+            <div
+              *ngIf="f.especialidade.errors?.maxlength"
+              class="invalid-feedback"
+            >
+              Deve ter no máximo 32 caracteres
+            </div>
+          </div>
+
+          <div class="col-md mt-2">
+            <label class="form-label">Telefone</label>
+            <input
+              type="text"
+              mask="(00)00000-0000"
+              class="form-control"
+              formControlName="telefone"
+              [ngClass]="{
+                'is-invalid': f.telefone.errors && f.telefone.touched
+              }"
+            />
+            <div *ngIf="f.telefone.errors?.required" class="invalid-feedback">
+              Telefone é obrigatório
+            </div>
+            <div *ngIf="f.telefone.errors?.minlength" class="invalid-feedback">
+              Deve conter 11 dígitos
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-4">
+        <div class="col-md">
+          <label class="my-2">Descrição do serviço</label>
+          <textarea
+            class="form-control"
+            rows="7"
+            formControlName="descricao"
+            [ngClass]="{
+              'is-invalid': f.descricao.errors && f.descricao.touched
+            }"
+          ></textarea>
+          <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+            Descrição é obrigatório
+          </div>
+          <div *ngIf="f.descricao.errors?.minlength" class="invalid-feedback">
+            Deve ter no mínimo 5 caracteres
+          </div>
+          <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 100 caracteres
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="mt-4 d-flex justify-content-evenly card-footer">
+      <button
+        type="submit"
+        class="btn btn-secondary botao"
+        (click)="resetarFormulario()"
+      >
+        Limpar dados
+      </button>
+      <button
+        type="submit"
+        class="btn btn-success botao"
+        (click)="salvarAlteracao()"
+        [disabled]="formulario.invalid"
+      >
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>

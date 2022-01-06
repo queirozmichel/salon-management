@@ -38,6 +38,7 @@ import { ClienteDetalheComponent } from './components/clientes/cliente-detalhe/c
 import { ClienteService } from './services/cliente.service';
 import { ProfissionaisListaComponent } from './components/profissionais/profissionais-lista/profissionais-lista.component';
 import { ProfissionalService } from './services/profissional.service';
+import { ProfissionalDetalheComponent } from './components/profissionais/profissional-detalhe/profissional-detalhe.component';
 
 registerLocaleData(ptBr);
 
@@ -53,6 +54,7 @@ registerLocaleData(ptBr);
     ClienteDetalheComponent,
     ProfissionaisComponent,
     ProfissionaisListaComponent,
+    ProfissionalDetalheComponent,
     PerfilComponent,
     UsuarioComponent,
     LoginComponent,
