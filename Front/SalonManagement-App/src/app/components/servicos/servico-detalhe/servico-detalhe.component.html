@@ -37,7 +37,10 @@
           <div class="col-md mt-2">
             <label class="form-label">Data</label>
             <input
-              type="datetime-local"
+              type="text"
+              mask="d0/M0/0000"
+              placeholder="00/00/0000"
+              [leadZeroDateTime]="true"
               class="form-control"
               formControlName="data"
               [ngClass]="{
@@ -46,6 +49,30 @@
             />
             <div *ngIf="f.data.errors?.required" class="invalid-feedback">
               Data é obrigatório
+            </div>
+            <div *ngIf="f.data.errors?.minlength" class="invalid-feedback">
+              Deve conter 8 dígitos
+            </div>
+          </div>
+
+          <div class="col-md mt-2">
+            <label class="form-label">Hora</label>
+            <input
+              type="text"
+              mask="Hh:m0"
+              placeholder="00:00"
+              [leadZeroDateTime]="true"
+              class="form-control"
+              formControlName="hora"
+              [ngClass]="{
+                'is-invalid': f.hora.errors && f.hora.touched
+              }"
+            />
+            <div *ngIf="f.hora.errors?.required" class="invalid-feedback">
+              Hora é obrigatório
+            </div>
+            <div *ngIf="f.hora.errors?.minlength" class="invalid-feedback">
+              Deve conter 4 dígitos
             </div>
           </div>
 
@@ -81,10 +108,10 @@
             Descrição é obrigatório
           </div>
           <div *ngIf="f.descricao.errors?.minlength" class="invalid-feedback">
-            Deve ter no mínimo 5 caracteres
+            Deve conter no mínimo 5 caracteres
           </div>
           <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
-            Deve ter no máximo 100 caracteres
+            Deve conter no máximo 100 caracteres
           </div>
         </div>
       </div>

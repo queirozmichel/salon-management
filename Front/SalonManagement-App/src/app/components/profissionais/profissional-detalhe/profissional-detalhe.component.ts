@@ -15,6 +15,7 @@ export class ProfissionalDetalheComponent implements OnInit {
   profissional: Profissional = {} as Profissional;
   profissionais: Profissional[] = [];
   formulario: FormGroup = {} as FormGroup;
+  modoPutOuPost = 'post';
 
   get f(): any {
     return this.formulario.controls;
@@ -34,9 +35,10 @@ export class ProfissionalDetalheComponent implements OnInit {
   }
 
   public carregarProfissional(): void {
-    this.spinner.show();
     const profissionalIdParam = this.router.snapshot.paramMap.get('id');
     if (profissionalIdParam != null) {
+      this.spinner.show();
+      this.modoPutOuPost = 'put';
       this.profissionalService
         .getProfissionalById(+profissionalIdParam)
         .subscribe({
@@ -60,7 +62,51 @@ export class ProfissionalDetalheComponent implements OnInit {
     this.spinner.hide();
   }
 
-  public salvarAlteracao(): void {}
+  public salvarAlteracao(): void {
+    this.spinner.show();
+    if (this.formulario.valid) {
+      if (this.modoPutOuPost == 'post') {
+        this.profissional = { ...this.formulario.value };
+        this.profissionalService.postProfissional(this.profissional).subscribe(
+          () =>
+            this.toaster.success('Profissional salvo com sucesso!', 'Sucesso'),
+          (error: any) => {
+            this.spinner.hide();
+            console.error(error);
+            this.toaster.error('Erro ao tentar salvar o profissional!', 'Erro');
+          },
+          () => {
+            this.spinner.hide();
+          }
+        );
+      } else {
+        this.profissional = {
+          id: this.profissional.id,
+          ...this.formulario.value,
+        };
+        this.profissionalService
+          .putProfissional(this.profissional.id, this.profissional)
+          .subscribe(
+            () =>
+              this.toaster.success(
+                'Profissional salvo com sucesso!',
+                'Sucesso'
+              ),
+            (error: any) => {
+              this.spinner.hide();
+              console.error(error);
+              this.toaster.error(
+                'Erro ao tentar salvar o profissional!',
+                'Erro'
+              );
+            },
+            () => {
+              this.spinner.hide();
+            }
+          );
+      }
+    }
+  }
 
   public validacao(): void {
     this.formulario = this.formBuilder.group({

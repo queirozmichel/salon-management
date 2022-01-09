@@ -19,10 +19,10 @@
               Nome é obrigatório
             </div>
             <div *ngIf="f.nome.errors?.minlength" class="invalid-feedback">
-              Deve ter no mínimo 5 caracteres
+              Deve conter no mínimo 5 caracteres
             </div>
             <div *ngIf="f.nome.errors?.maxlength" class="invalid-feedback">
-              Deve ter no máximo 25 caracteres
+              Deve conter no máximo 25 caracteres
             </div>
           </div>
           <div class="col-md mt-2">
@@ -59,10 +59,10 @@
             Endereço é obrigatório
           </div>
           <div *ngIf="f.endereco.errors?.minlength" class="invalid-feedback">
-            Deve ter no mínimo 5 caracteres
+            Deve conter no mínimo 5 caracteres
           </div>
           <div *ngIf="f.endereco.errors?.maxlength" class="invalid-feedback">
-            Deve ter no máximo 50 caracteres
+            Deve conter no máximo 50 caracteres
           </div>
         </div>
 
@@ -81,7 +81,7 @@
               *ngIf="f.especialidade.errors?.maxlength"
               class="invalid-feedback"
             >
-              Deve ter no máximo 32 caracteres
+              Deve conter no máximo 32 caracteres
             </div>
           </div>
 

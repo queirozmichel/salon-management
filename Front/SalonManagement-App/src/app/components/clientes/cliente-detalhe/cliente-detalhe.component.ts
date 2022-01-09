@@ -15,6 +15,7 @@ export class ClienteDetalheComponent implements OnInit {
   cliente: Cliente = {} as Cliente;
   clientes: Cliente[] = [];
   formulario: FormGroup = {} as FormGroup;
+  modoPutOuPost = 'post';
 
   get f(): any {
     return this.formulario.controls;
@@ -34,9 +35,10 @@ export class ClienteDetalheComponent implements OnInit {
   }
 
   public carregarCliente(): void {
-    this.spinner.show();
     const clienteIdParam = this.router.snapshot.paramMap.get('id');
     if (clienteIdParam != null) {
+      this.spinner.show();
+      this.modoPutOuPost = 'put';
       this.clienteService.getClienteById(+clienteIdParam).subscribe({
         next: (_cliente: Cliente) => {
           this.cliente = { ..._cliente };
@@ -55,7 +57,38 @@ export class ClienteDetalheComponent implements OnInit {
     this.spinner.hide();
   }
 
-  public salvarAlteracao(): void {}
+  public salvarAlteracao(): void {
+    this.spinner.show();
+    if (this.formulario.valid) {
+      if (this.modoPutOuPost == 'post') {
+        this.cliente = { ...this.formulario.value };
+        this.clienteService.postCliente(this.cliente).subscribe(
+          () => this.toaster.success('Cliente salvo com sucesso!', 'Sucesso'),
+          (error: any) => {
+            this.spinner.hide();
+            console.error(error);
+            this.toaster.error('Erro ao tentar salvar o cliente!', 'Erro');
+          },
+          () => {
+            this.spinner.hide();
+          }
+        );
+      } else {
+        this.cliente = { id: this.cliente.id, ...this.formulario.value };
+        this.clienteService.putCliente(this.cliente.id, this.cliente).subscribe(
+          () => this.toaster.success('Cliente salvo com sucesso!', 'Sucesso'),
+          (error: any) => {
+            this.spinner.hide();
+            console.error(error);
+            this.toaster.error('Erro ao tentar salvar o cliente!', 'Erro');
+          },
+          () => {
+            this.spinner.hide();
+          }
+        );
+      }
+    }
+  }
 
   public validacao(): void {
     this.formulario = this.formBuilder.group({

@@ -95,7 +95,8 @@ export class ServicoDetalheComponent implements OnInit {
       profissional: this.formBuilder.group({
         nome: ['', Validators.required],
       }),
-      data: ['', Validators.required],
+      data: ['', [Validators.required, Validators.minLength(10)]],
+      hora: ['', [Validators.required, Validators.minLength(5)]],
       valor: [''],
       descricao: [
         '',

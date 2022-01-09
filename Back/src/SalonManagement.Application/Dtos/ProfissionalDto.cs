@@ -16,11 +16,11 @@ namespace SalonManagement.Application.Dtos
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Preenchimento obrigatório")]
-        [RegularExpression("([0-9]{11})", ErrorMessage = "Deve conter 11 dígitos numéricos")]
+        [RegularExpression("([0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2})", ErrorMessage = "Deve estar no seguinte formato: 000.000.000-00")]
         public string CPF { get; set; }
 
         [Required(ErrorMessage = "Preenchimento obrigatório")]
-        [RegularExpression("([0-9]{11})", ErrorMessage = "Deve conter 11 dígitos numéricos")]
+        [RegularExpression("([(][0-9]{2}[)][0-9]{5}[-][0-9]{4})", ErrorMessage = "Deve estar no seguinte formato: (00)00000-0000")]
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "Preenchimento obrigatório"),

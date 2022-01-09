@@ -21,7 +21,7 @@
         <th scope="col">Cliente</th>
         <th scope="col">Profissional</th>
         <th scope="col">Data</th>
-        <th class="d-none d-md-table-cell" scope="col">Descrição</th>
+        <th class="d-none d-md-table-cell" scope="col">Hora</th>
         <th class="d-none d-sm-table-cell" scope="col">Valor</th>
       </tr>
     </thead>
@@ -39,10 +39,10 @@
           {{ servico.profissional.nome }}
         </td>
         <td>
-          {{ servico.data | date: "dd/MM/yyy HH:mm":"":"" }}
+          {{ servico.data }}
         </td>
         <td class="d-none d-md-table-cell">
-          {{ servico.descricao }}
+          {{ servico.hora }}
         </td>
         <td class="d-none d-sm-table-cell">
           {{ servico.valor | currency: "BRL" }}

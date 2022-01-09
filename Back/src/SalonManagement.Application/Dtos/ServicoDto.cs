@@ -12,7 +12,11 @@ namespace SalonManagement.Application.Dtos
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Preenchimento obrigatório")]
-        public DateTime Data { get; set; }
+        public string Data { get; set; }
+
+        [Required(ErrorMessage = "Preenchimento obrigatório")]
+        public string Hora { get; set; }
+
 
         [Required(ErrorMessage = "Preenchimento obrigatório"),
          MinLength(5, ErrorMessage = "Deve ter no mínimo 5 caracteres"),

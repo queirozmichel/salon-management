@@ -82,7 +82,7 @@ registerLocaleData(ptBr);
       preventDuplicates: true,
       progressBar: true,
     }),
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot({ dropSpecialCharacters: false }),
   ],
   providers: [
     ServicoService,

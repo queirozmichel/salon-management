@@ -5,6 +5,7 @@ import { Profissional } from './Profissional';
 export interface Servico {
   id: number;
   data: string;
+  hora: string;
   descricao: string;
   valor: number;
   profissionalId: number;

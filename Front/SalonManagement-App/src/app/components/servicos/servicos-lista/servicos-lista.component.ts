@@ -82,10 +82,12 @@ export class ServicosListaComponent implements OnInit {
 
   public filtrarServicos(filtro: string): Servico[] {
     filtro = filtro.toLocaleLowerCase();
+
+    // return this.servicos.filter(
+    //   (servico: any) => servico.data.toLocaleLowerCase().indexOf(filtro) !== -1
+    // );
     return this.servicos.filter(
-      (servico: any) =>
-        servico.descricao.toLocaleLowerCase().indexOf(filtro) !== -1 ||
-        servico.data.toLocaleLowerCase().indexOf(filtro) !== -1
+      (servico: any) => servico.data.toLocaleLowerCase().indexOf(filtro) !== -1
     );
   }
 
