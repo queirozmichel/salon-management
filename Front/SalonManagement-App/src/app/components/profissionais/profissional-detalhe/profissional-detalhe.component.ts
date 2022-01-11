@@ -118,17 +118,17 @@ export class ProfissionalDetalheComponent implements OnInit {
           Validators.maxLength(25),
         ],
       ],
-      cpf: ['', [Validators.required, Validators.minLength(11)]],
+      cpf: ['', [Validators.required, Validators.minLength(14)]],
       endereco: [
         '',
         [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(50),
+          Validators.maxLength(80),
         ],
       ],
       especialidade: ['', [Validators.maxLength(32)]],
-      telefone: ['', [Validators.required, Validators.minLength(11)]],
+      telefone: ['', [Validators.required, Validators.minLength(14)]],
     });
   }
   public resetarFormulario(): void {

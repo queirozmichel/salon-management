@@ -1,7 +1,7 @@
 <div class="card rounded bg-light shadow-sm">
   <form [formGroup]="formulario">
-    <!-- <p>Form value: {{ formulario.value | json }}</p>
-    <p>Form valid: {{ formulario.status | json }}</p> -->
+    <p>Form value: {{ formulario.value | json }}</p>
+    <p>Form valid: {{ formulario.status | json }}</p>
     <div class="row p-4">
       <div class="col-md-8">
         <div class="col-md" formGroupName="cliente">
@@ -89,7 +89,16 @@
                 thousands: '.',
                 decimal: ','
               }"
+              [ngClass]="{
+                'is-invalid': f.valor.errors && f.valor.touched
+              }"
             />
+            <div *ngIf="f.valor.errors?.min" class="invalid-feedback">
+              Valor mínimo de R$0,01
+            </div>
+            <div *ngIf="f.valor.errors?.max" class="invalid-feedback">
+              Valor máximo de R$9.999,99
+            </div>
           </div>
         </div>
       </div>

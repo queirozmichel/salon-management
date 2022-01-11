@@ -82,7 +82,9 @@ export class ServicoDetalheComponent implements OnInit {
       error: (erro: any) => {
         console.error(erro);
       },
-      complete: () => {},
+      complete: () => {
+        console.log(this.servicos);
+      },
     });
   }
 
@@ -92,12 +94,13 @@ export class ServicoDetalheComponent implements OnInit {
       cliente: this.formBuilder.group({
         nome: ['', Validators.required],
       }),
+      profissionalId: [''],
       profissional: this.formBuilder.group({
         nome: ['', Validators.required],
       }),
       data: ['', [Validators.required, Validators.minLength(10)]],
       hora: ['', [Validators.required, Validators.minLength(5)]],
-      valor: [''],
+      valor: ['', [Validators.min(0.01), Validators.max(9999.99)]],
       descricao: [
         '',
         [

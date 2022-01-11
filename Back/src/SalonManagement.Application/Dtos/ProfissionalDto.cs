@@ -25,7 +25,7 @@ namespace SalonManagement.Application.Dtos
 
         [Required(ErrorMessage = "Preenchimento obrigatório"),
         MinLength(5, ErrorMessage = "Deve ter no mínimo 5 caracteres"),
-        MaxLength(25, ErrorMessage = "Deve ter no máximo 50 caracteres")]
+        MaxLength(80, ErrorMessage = "Deve ter no máximo 80 caracteres")]
         public string Endereco { get; set; }
 
         public string Especialidade { get; set; }

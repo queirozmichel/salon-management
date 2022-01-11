@@ -1,7 +1,7 @@
 <div class="card rounded bg-light shadow-sm">
   <form [formGroup]="formulario">
-    <p>Form value: {{ formulario.value | json }}</p>
-    <p>Form valid: {{ formulario.status | json }}</p>
+    <!-- <p>Form value: {{ formulario.value | json }}</p>
+    <p>Form valid: {{ formulario.status | json }}</p> -->
     <div class="row p-4">
       <div class="col-md-8">
         <div class="col-md">
@@ -44,7 +44,7 @@
             Deve conter no mínimo 5 caracteres
           </div>
           <div *ngIf="f.endereco.errors?.maxlength" class="invalid-feedback">
-            Deve conter no máximo 50 caracteres
+            Deve conter no máximo 80 caracteres
           </div>
         </div>
 

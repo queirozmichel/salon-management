@@ -105,11 +105,11 @@ export class ClienteDetalheComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(50),
+          Validators.maxLength(80),
         ],
       ],
-      cpf: ['', [Validators.required, Validators.minLength(11)]],
-      telefone: ['', [Validators.required, Validators.minLength(11)]],
+      cpf: ['', [Validators.required, Validators.minLength(14)]],
+      telefone: ['', [Validators.required, Validators.minLength(14)]],
     });
   }
   public resetarFormulario(): void {
