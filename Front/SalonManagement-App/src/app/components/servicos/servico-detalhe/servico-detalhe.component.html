@@ -1,36 +1,49 @@
 <div class="card rounded bg-light shadow-sm">
   <form [formGroup]="formulario">
-    <p>Form value: {{ formulario.value | json }}</p>
-    <p>Form valid: {{ formulario.status | json }}</p>
+    <!-- <p>Form value: {{ formulario.value | json }}</p>
+    <p>Form valid: {{ formulario.status | json }}</p> -->
     <div class="row p-4">
       <div class="col-md-8">
-        <div class="col-md" formGroupName="cliente">
+        <div class="col-md">
           <label class="form-label">Cliente</label>
-          <select class="form-select" formControlName="nome">
-            <option *ngIf="servico.id != null" value="" disabled>
-              {{ servico.cliente.nome }}
-            </option>
-
-            <option *ngFor="let item of servicos" [value]="item.cliente.nome">
-              {{ item.cliente.nome }}
+          <select
+            class="form-select"
+            formControlName="clienteId"
+            [ngClass]="{
+              'is-invalid': f.clienteId.errors && f.clienteId.touched
+            }"
+          >
+            <option *ngFor="let cliente of clientes" [value]="cliente.id">
+              {{ cliente.nome }}
             </option>
           </select>
+          <div *ngIf="f.clienteId.errors?.required" class="invalid-feedback">
+            Cliente é obrigatório
+          </div>
         </div>
 
-        <div class="col-md mt-2" formGroupName="profissional">
+        <div class="col-md mt-2">
           <label class="form-label">Profissional</label>
-          <select class="form-select" formControlName="nome">
-            <option *ngIf="servico.id != null" value="" disabled>
-              {{ servico.profissional.nome }}
-            </option>
-
+          <select
+            class="form-select"
+            formControlName="profissionalId"
+            [ngClass]="{
+              'is-invalid': f.profissionalId.errors && f.profissionalId.touched
+            }"
+          >
             <option
-              *ngFor="let item of servicos"
-              [value]="item.profissional.nome"
+              *ngFor="let profissional of profissionais"
+              [value]="profissional.id"
             >
-              {{ item.profissional.nome }}
+              {{ profissional.nome }}
             </option>
           </select>
+          <div
+            *ngIf="f.profissionalId.errors?.required"
+            class="invalid-feedback"
+          >
+            Profissional é obrigatório
+          </div>
         </div>
 
         <div class="row">
@@ -69,7 +82,7 @@
               }"
             />
             <div *ngIf="f.hora.errors?.required" class="invalid-feedback">
-              Hora é obrigatório
+              Hora é obrigatória
             </div>
             <div *ngIf="f.hora.errors?.minlength" class="invalid-feedback">
               Deve conter 4 dígitos
@@ -114,7 +127,7 @@
             }"
           ></textarea>
           <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
-            Descrição é obrigatório
+            Descrição é obrigatória
           </div>
           <div *ngIf="f.descricao.errors?.minlength" class="invalid-feedback">
             Deve conter no mínimo 5 caracteres

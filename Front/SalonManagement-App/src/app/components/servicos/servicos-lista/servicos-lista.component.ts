@@ -57,7 +57,6 @@ export class ServicosListaComponent implements OnInit {
     this.spinner.show();
     this.servicoService.deleteServico(this.servicoId).subscribe(
       (resultado: any) => {
-        console.log(resultado);
         this.toastr.success('O serviço foi excluído.', 'Sucesso!');
         this.spinner.hide();
         this.carregarServicos();
@@ -82,12 +81,10 @@ export class ServicosListaComponent implements OnInit {
 
   public filtrarServicos(filtro: string): Servico[] {
     filtro = filtro.toLocaleLowerCase();
-
-    // return this.servicos.filter(
-    //   (servico: any) => servico.data.toLocaleLowerCase().indexOf(filtro) !== -1
-    // );
     return this.servicos.filter(
-      (servico: any) => servico.data.toLocaleLowerCase().indexOf(filtro) !== -1
+      (servico: any) =>
+        servico.data.toLocaleLowerCase().indexOf(filtro) !== -1 ||
+        servico.cliente.nome.toLocaleLowerCase().indexOf(filtro) !== -1
     );
   }
 
