@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SalonManagement.Persistence;
 using SalonManagement.Persistence.Contextos;
 
 namespace SalonManagement.Persistence.Migrations
@@ -51,9 +50,6 @@ namespace SalonManagement.Persistence.Migrations
                     b.Property<string>("Marca")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("QtdEstoque")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Tipo")
                         .HasColumnType("TEXT");
 
@@ -86,6 +82,9 @@ namespace SalonManagement.Persistence.Migrations
                     b.Property<string>("CPF")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Endereco")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Especialidade")
                         .HasColumnType("TEXT");
 
@@ -115,6 +114,9 @@ namespace SalonManagement.Persistence.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Hora")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("ProfissionalId")
                         .HasColumnType("INTEGER");
 
@@ -133,7 +135,7 @@ namespace SalonManagement.Persistence.Migrations
             modelBuilder.Entity("SalonManagement.Domain.ProdutoServico", b =>
                 {
                     b.HasOne("SalonManagement.Domain.Produto", "Produto")
-                        .WithMany()
+                        .WithMany("ProdutosServicos")
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -166,6 +168,11 @@ namespace SalonManagement.Persistence.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Profissional");
+                });
+
+            modelBuilder.Entity("SalonManagement.Domain.Produto", b =>
+                {
+                    b.Navigation("ProdutosServicos");
                 });
 
             modelBuilder.Entity("SalonManagement.Domain.Servico", b =>

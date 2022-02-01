@@ -30,8 +30,7 @@ namespace SalonManagement.Persistence.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Tipo = table.Column<string>(type: "TEXT", nullable: true),
                     Marca = table.Column<string>(type: "TEXT", nullable: true),
-                    Descricao = table.Column<string>(type: "TEXT", nullable: true),
-                    QtdEstoque = table.Column<int>(type: "INTEGER", nullable: false)
+                    Descricao = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,6 +46,7 @@ namespace SalonManagement.Persistence.Migrations
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
                     CPF = table.Column<string>(type: "TEXT", nullable: true),
                     Telefone = table.Column<string>(type: "TEXT", nullable: true),
+                    Endereco = table.Column<string>(type: "TEXT", nullable: true),
                     Especialidade = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -61,6 +61,7 @@ namespace SalonManagement.Persistence.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Data = table.Column<string>(type: "TEXT", nullable: true),
+                    Hora = table.Column<string>(type: "TEXT", nullable: true),
                     Descricao = table.Column<string>(type: "TEXT", nullable: true),
                     Valor = table.Column<decimal>(type: "TEXT", nullable: false),
                     ProfissionalId = table.Column<int>(type: "INTEGER", nullable: false),
