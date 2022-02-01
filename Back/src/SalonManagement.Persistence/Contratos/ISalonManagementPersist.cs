@@ -22,6 +22,7 @@ namespace SalonManagement.Persistence.Contratos
 
         //PRODUTOS
         Task<Produto[]> GetAllProdutosByTipoAsync(string tipo);
+        Task<Produto[]> GetAllProdutosByMarcaAsync(string marca);
         Task<Produto[]> GetAllProdutosAsync();
         Task<Produto> GetProdutoByIdAsync(int produtoId);
 

@@ -103,6 +103,14 @@ namespace SalonManagement.Persistence
             return await query.ToArrayAsync();
         }
 
+        public async Task<Produto[]> GetAllProdutosByMarcaAsync(string marca)
+        {
+            IQueryable<Produto> query = _contexto.Produto;
+            query = query.AsNoTracking().OrderBy(x => x.Id)
+            .Where(x => x.Marca.ToLower().Contains(marca.ToLower()));
+            return await query.ToArrayAsync();
+        }
+
         public async Task<Produto> GetProdutoByIdAsync(int produtoId)
         {
             IQueryable<Produto> query = _contexto.Produto;

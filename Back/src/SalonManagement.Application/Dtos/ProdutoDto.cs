@@ -11,6 +11,5 @@ namespace SalonManagement.Application.Dtos
         public string Tipo { get; set; }
         public string Marca { get; set; }
         public string Descricao { get; set; }
-        public int QtdEstoque { get; set; }
     }
 }
