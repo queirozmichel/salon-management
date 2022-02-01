@@ -58,7 +58,7 @@ namespace SalonManagement.Application
 
                 if (await _salonManagementPersist.SaveChangesAsync())
                 {
-                    var produtoRetorno = await _salonManagementPersist.GetClienteByIdAsync(produto.Id);
+                    var produtoRetorno = await _salonManagementPersist.GetProdutoByIdAsync(produto.Id);
                     return _mapper.Map<ProdutoDto>(produtoRetorno);
                 }
                 return null;

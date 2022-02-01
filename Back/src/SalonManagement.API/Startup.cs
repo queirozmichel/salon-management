@@ -35,6 +35,7 @@ namespace SalonManagement.API
             services.AddScoped<IServicoService, ServicoService>();
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IProfissionalService, ProfissionalService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
 
             services.AddScoped<ISalonManagementPersist, SalonManagementPersist>();
 
