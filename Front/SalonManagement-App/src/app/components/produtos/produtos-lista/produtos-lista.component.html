@@ -1,0 +1,72 @@
+<div class="card bg-light rounded shadow-sm p-4">
+  <div class="my-4">
+    <div class="col-12 input-group">
+      <span class="input-group-text"
+        ><i class="fas fa-search iconeDeBusca"></i
+      ></span>
+      <input
+        [(ngModel)]="filtroTabela"
+        type="text"
+        class="form-control campoDeBusca"
+        placeholder="Buscar por nome"
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder ='Buscar por nome'"
+      />
+    </div>
+  </div>
+  <table class="table">
+    <thead class="text-center cabecalho">
+      <tr>
+        <th class="d-none d-md-table-cell" scope="col">Código</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Descrição</th>
+      </tr>
+    </thead>
+    <tbody class="text-center" *ngIf="produtos && produtos.length">
+      <tr
+        style="cursor: pointer"
+        *ngFor="let produto of produtosFiltrados"
+        (click)="detalheProduto(produto.id)"
+      >
+        <th class="d-none d-md-table-cell">
+          {{ produto.id }}
+        </th>
+        <td>{{ produto.tipo }}</td>
+        <td>
+          {{ produto.marca }}
+        </td>
+        <td>
+          {{ produto.descricao }}
+        </td>
+        <td class="colunaApagar">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            tooltip="Apagar"
+            (click)="openModal($event, produto.id, template)"
+          >
+            <i class="fas fa-trash iconeDeLixo"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="produtos.length == 0">
+      <tr>
+        <td colspan="8" class="text-center"></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Apagar o cliente de código {{ this.produtoId }}?</p>
+    <button type="button" class="btn btn-default" (click)="confirmarExclusao()">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="negarExclusao()">
+      Não
+    </button>
+  </div>
+</ng-template>

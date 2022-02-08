@@ -39,6 +39,9 @@ import { ClienteService } from './services/cliente.service';
 import { ProfissionaisListaComponent } from './components/profissionais/profissionais-lista/profissionais-lista.component';
 import { ProfissionalService } from './services/profissional.service';
 import { ProfissionalDetalheComponent } from './components/profissionais/profissional-detalhe/profissional-detalhe.component';
+import { ProdutoService } from './services/produto.service';
+import { ProdutoDetalheComponent } from './components/produtos/produto-detalhe/produto-detalhe.component';
+import { ProdutosListaComponent } from './components/produtos/produtos-lista/produtos-lista.component';
 
 registerLocaleData(ptBr);
 
@@ -55,6 +58,8 @@ registerLocaleData(ptBr);
     ProfissionaisComponent,
     ProfissionaisListaComponent,
     ProfissionalDetalheComponent,
+    ProdutosListaComponent,
+    ProdutoDetalheComponent,
     PerfilComponent,
     UsuarioComponent,
     LoginComponent,
@@ -88,6 +93,7 @@ registerLocaleData(ptBr);
     ServicoService,
     ClienteService,
     ProfissionalService,
+    ProdutoService,
     { provide: LOCALE_ID, useValue: 'pt' },
   ],
   bootstrap: [AppComponent],

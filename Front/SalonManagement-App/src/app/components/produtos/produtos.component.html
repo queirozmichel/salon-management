@@ -1,1 +1,8 @@
-<app-titulo [titulo]="'Produtos'" [iconeTitulo]="'fas fa-store'"></app-titulo>
+<app-titulo
+  [titulo]="'Produtos'"
+  [iconeTitulo]="'fas fa-store'"
+  [textoBotaoNovo]="'Produto'"
+  [botaoListar]="botaoNovo()"
+  [botaoNovo]="botaoListar()"
+></app-titulo>
+<router-outlet></router-outlet>

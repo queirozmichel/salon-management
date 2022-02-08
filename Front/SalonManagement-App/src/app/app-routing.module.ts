@@ -15,6 +15,8 @@ import { ClienteDetalheComponent } from './components/clientes/cliente-detalhe/c
 import { ClientesListaComponent } from './components/clientes/clientes-lista/clientes-lista.component';
 import { ProfissionalDetalheComponent } from './components/profissionais/profissional-detalhe/profissional-detalhe.component';
 import { ProfissionaisListaComponent } from './components/profissionais/profissionais-lista/profissionais-lista.component';
+import { ProdutoDetalheComponent } from './components/produtos/produto-detalhe/produto-detalhe.component';
+import { ProdutosListaComponent } from './components/produtos/produtos-lista/produtos-lista.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,7 @@ const routes: Routes = [
   { path: 'servicos', redirectTo: 'servicos/lista' },
   { path: 'clientes', redirectTo: 'clientes/lista' },
   { path: 'profissionais', redirectTo: 'profissionais/lista' },
+  { path: 'produtos', redirectTo: 'produtos/lista' },
   {
     path: 'servicos',
     component: ServicosComponent,
@@ -58,9 +61,20 @@ const routes: Routes = [
     ],
   },
 
+  {
+    path: 'produtos',
+    component: ProdutosComponent,
+    children: [
+      { path: 'detalhe/:id', component: ProdutoDetalheComponent },
+      { path: 'detalhe', component: ProdutoDetalheComponent },
+      { path: 'lista', component: ProdutosListaComponent },
+    ],
+  },
+
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'produtos', component: ProdutosComponent },
+  { path: 'clientes', component: ClientesComponent },
   { path: 'profissionais', component: ProfissionaisComponent },
+  { path: 'produtos', component: ProdutosComponent },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },

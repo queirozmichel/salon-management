@@ -3,5 +3,4 @@ export interface Produto {
   tipo: string;
   marca: string;
   descricao: string;
-  qtdEstoque: number;
 }

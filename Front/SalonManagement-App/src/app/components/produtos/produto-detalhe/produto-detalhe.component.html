@@ -1,0 +1,86 @@
+<div class="card rounded bg-light shadow-sm">
+  <form [formGroup]="formulario">
+    <!-- <p>Form value: {{ formulario.value | json }}</p>
+    <p>Form valid: {{ formulario.status | json }}</p> -->
+    <div class="row p-4">
+      <div class="col-md-8">
+        <div class="col-md">
+          <div class="col-md mt-2">
+            <label class="form-label">Tipo</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="tipo"
+              [ngClass]="{
+                'is-invalid': f.tipo.errors && f.tipo.touched
+              }"
+            />
+            <div *ngIf="f.tipo.errors?.required" class="invalid-feedback">
+              Tipo é obrigatório
+            </div>
+            <div *ngIf="f.tipo.errors?.minlength" class="invalid-feedback">
+              Deve conter no mínimo 3 caracteres
+            </div>
+            <div *ngIf="f.tipo.errors?.maxlength" class="invalid-feedback">
+              Deve conter no máximo 20 caracteres
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md mt-2">
+          <label class="form-label">Marca</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="marca"
+            [ngClass]="{
+              'is-invalid': f.marca.errors && f.marca.touched
+            }"
+          />
+          <div *ngIf="f.marca.errors?.required" class="invalid-feedback">
+            Marca é obrigatório
+          </div>
+          <div *ngIf="f.marca.errors?.minlength" class="invalid-feedback">
+            Deve conter no mínimo 3 caracteres
+          </div>
+          <div *ngIf="f.marca.errors?.maxlength" class="invalid-feedback">
+            Deve conter no máximo 20 caracteres
+          </div>
+        </div>
+
+        <div class="col-md mt-2">
+          <label class="form-label">Descrição</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="descricao"
+            [ngClass]="{
+              'is-invalid': f.descricao.errors && f.descricao.touched
+            }"
+          />
+          <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
+            Deve conter no máximo 50 caracteres
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-evenly card-footer">
+      <button
+        type="submit"
+        class="btn btn-secondary botao"
+        (click)="resetarFormulario()"
+      >
+        Limpar dados
+      </button>
+      <button
+        type="submit"
+        class="btn btn-success botao"
+        (click)="salvarAlteracao()"
+        [disabled]="formulario.invalid"
+      >
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>
