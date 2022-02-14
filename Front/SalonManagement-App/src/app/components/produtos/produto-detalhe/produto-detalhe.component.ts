@@ -104,7 +104,7 @@ export class ProdutoDetalheComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(2),
           Validators.maxLength(20),
         ],
       ],

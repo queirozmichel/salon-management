@@ -10,12 +10,11 @@ namespace SalonManagement.Persistence.Contextos
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Profissional> Profissional { get; set; }
-        public DbSet<ProdutoServico> ProdutoServico { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ProdutoServico>()
-            .HasKey(PS => new { PS.ServicoId, PS.ProdutoId });
-        }
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     modelBuilder.Entity<ProdutoServico>()
+        //     .HasKey(PS => new { PS.ServicoId, PS.ProdutoId });
+        // }
     }
 }

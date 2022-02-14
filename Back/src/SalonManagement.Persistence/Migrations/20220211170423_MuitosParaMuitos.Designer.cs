@@ -8,14 +8,29 @@ using SalonManagement.Persistence.Contextos;
 namespace SalonManagement.Persistence.Migrations
 {
     [DbContext(typeof(SalonManagementContexto))]
-    [Migration("20220201140729_Primeira")]
-    partial class Primeira
+    [Migration("20220211170423_MuitosParaMuitos")]
+    partial class MuitosParaMuitos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.2");
+
+            modelBuilder.Entity("ProdutoServico", b =>
+                {
+                    b.Property<int>("ProdutosId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ServicosId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProdutosId", "ServicosId");
+
+                    b.HasIndex("ServicosId");
+
+                    b.ToTable("ProdutoServico");
+                });
 
             modelBuilder.Entity("SalonManagement.Domain.Cliente", b =>
                 {
@@ -58,21 +73,6 @@ namespace SalonManagement.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Produto");
-                });
-
-            modelBuilder.Entity("SalonManagement.Domain.ProdutoServico", b =>
-                {
-                    b.Property<int>("ServicoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ServicoId", "ProdutoId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("ProdutoServico");
                 });
 
             modelBuilder.Entity("SalonManagement.Domain.Profissional", b =>
@@ -134,23 +134,19 @@ namespace SalonManagement.Persistence.Migrations
                     b.ToTable("Servico");
                 });
 
-            modelBuilder.Entity("SalonManagement.Domain.ProdutoServico", b =>
+            modelBuilder.Entity("ProdutoServico", b =>
                 {
-                    b.HasOne("SalonManagement.Domain.Produto", "Produto")
-                        .WithMany("ProdutosServicos")
-                        .HasForeignKey("ProdutoId")
+                    b.HasOne("SalonManagement.Domain.Produto", null)
+                        .WithMany()
+                        .HasForeignKey("ProdutosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SalonManagement.Domain.Servico", "Servico")
-                        .WithMany("ProdutosServicos")
-                        .HasForeignKey("ServicoId")
+                    b.HasOne("SalonManagement.Domain.Servico", null)
+                        .WithMany()
+                        .HasForeignKey("ServicosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Produto");
-
-                    b.Navigation("Servico");
                 });
 
             modelBuilder.Entity("SalonManagement.Domain.Servico", b =>
@@ -170,16 +166,6 @@ namespace SalonManagement.Persistence.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Profissional");
-                });
-
-            modelBuilder.Entity("SalonManagement.Domain.Produto", b =>
-                {
-                    b.Navigation("ProdutosServicos");
-                });
-
-            modelBuilder.Entity("SalonManagement.Domain.Servico", b =>
-                {
-                    b.Navigation("ProdutosServicos");
                 });
 #pragma warning restore 612, 618
         }

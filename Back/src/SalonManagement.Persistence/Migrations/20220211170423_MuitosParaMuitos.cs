@@ -2,7 +2,7 @@
 
 namespace SalonManagement.Persistence.Migrations
 {
-    public partial class Primeira : Migration
+    public partial class MuitosParaMuitos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,30 +88,30 @@ namespace SalonManagement.Persistence.Migrations
                 name: "ProdutoServico",
                 columns: table => new
                 {
-                    ProdutoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ServicoId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ProdutosId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServicosId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProdutoServico", x => new { x.ServicoId, x.ProdutoId });
+                    table.PrimaryKey("PK_ProdutoServico", x => new { x.ProdutosId, x.ServicosId });
                     table.ForeignKey(
-                        name: "FK_ProdutoServico_Produto_ProdutoId",
-                        column: x => x.ProdutoId,
+                        name: "FK_ProdutoServico_Produto_ProdutosId",
+                        column: x => x.ProdutosId,
                         principalTable: "Produto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProdutoServico_Servico_ServicoId",
-                        column: x => x.ServicoId,
+                        name: "FK_ProdutoServico_Servico_ServicosId",
+                        column: x => x.ServicosId,
                         principalTable: "Servico",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProdutoServico_ProdutoId",
+                name: "IX_ProdutoServico_ServicosId",
                 table: "ProdutoServico",
-                column: "ProdutoId");
+                column: "ServicosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Servico_ClienteId",

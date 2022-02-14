@@ -48,8 +48,7 @@ namespace SalonManagement.Persistence
             .Include(x => x.Cliente);
             if (incluirProdutos)
             {
-                query = query.Include(x => x.ProdutosServicos)
-                .ThenInclude(x => x.Produto);
+                query = query.Include(x => x.Produtos);
             }
             query = query.AsNoTracking().OrderBy(x => x.Id);
 
@@ -63,9 +62,13 @@ namespace SalonManagement.Persistence
             .Include(x => x.Cliente);
             if (incluirProdutos)
             {
-                query = query.Include(x => x.ProdutosServicos)
-                .ThenInclude(x => x.Produto);
+                query = query.Include(x => x.Produtos);
             }
+            // if (incluirProdutos)
+            // {
+            //     query = query.Include(x => x.ProdutosServicos)
+            //     .ThenInclude(x => x.Produto);
+            // }
             query = query.AsNoTracking().OrderBy(x => x.Id)
             .Where(x => x.Data.ToLower().Contains(data.ToLower()));
 
@@ -79,8 +82,7 @@ namespace SalonManagement.Persistence
             .Include(x => x.Cliente);
             if (incluirProdutos)
             {
-                query = query.Include(x => x.ProdutosServicos)
-                .ThenInclude(x => x.Produto);
+                query = query.Include(x => x.Produtos);
             }
             query = query.AsNoTracking().OrderBy(x => x.Id)
             .Where(x => x.Id == servicoId);

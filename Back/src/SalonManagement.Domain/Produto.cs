@@ -11,6 +11,6 @@ namespace SalonManagement.Domain
         public string Tipo { get; set; }
         public string Marca { get; set; }
         public string Descricao { get; set; }
-        public IEnumerable<ProdutoServico> ProdutosServicos { get; set; }
+        public ICollection<Servico> Servicos { get; set; }
     }
 }
